@@ -602,15 +602,21 @@
 			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;   color: white;'> Historique</b><div class='line'></div>");
 			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>▪ Historique des contacts... </b>");
 			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;   color: white;'> Actions</b><div class='line'></div>");
-			$('#box16').html("<img src='proprio.svg' alt='HTML5' id='action1'  width='20' height='20'>");
+			$('#box16').html("<img src='icone/proprio.svg' alt='HTML5' id='action1'  width='20' height='20'>");
+
 			});
 			}
 			
-			//AFFICHAGE DE LA BARRE D'INFORMATION
+		//ACTIONS DE LA SIDEBAR
 	    function rr() {
-        document.getElementById("test-in").className = "test-test";
+        $('#box16').html("<img src='icone/proprio.svg' alt='HTML5' id='action1'  width='20' height='20'><b style = 'font-size: 10px; color = 'grey'> Afficher les lots du même propriétaire</b>");
         };
-		document.getElementById("box16").addEventListener("click", rr);
+		document.getElementById("box16").addEventListener('mouseover', rr);
+		
+		function rr2() {
+        $('#box16').html("<img src='icone/proprio.svg' alt='HTML5' id='action1'  width='20' height='20'>");
+        };
+		document.getElementById("box16").addEventListener('mouseout', rr2);
 		
 
 			
