@@ -1,0 +1,246 @@
+ body {
+   margin: 0px;
+   border: 0px;
+   padding: 0px;
+   font-family: sans-serif;
+   color: #333;
+}
+
+#map {
+  width: 80%;
+  height : 100%;
+  position : absolute;
+}
+
+/*    SIDEBAR      */
+#sidebar {
+    position: absolute;
+    right: 0;
+    width: 20%;
+    z-index: 1000;
+    background: #F0F8FF;
+    height: 95%;
+    bottom: 0;
+	box-shadow: 0 0 6px #999;
+}
+
+
+
+#head2 {
+	position: absolute;
+    right: 0;
+    background: #078BAB;
+    width: 20%;
+    height: 5%;
+    top: 0;
+    z-index: 1000;
+}
+
+
+#logo {
+	position: absolute;
+    left: 340px;
+    height: 30px;
+	top : 8px;
+	cursor: pointer;
+}
+#logo:hover {
+  box-shadow: 0 0 8px yellow;
+}
+
+#logoprint {
+	position: absolute;
+    left: 290px;
+    height: 30px;
+	top : 8px;
+}
+
+#logoprint:hover {
+  box-shadow: 0 0 8px yellow;
+}
+
+/*    fenêtre d'information     */
+#close {
+	position: absolute;
+	left: 90%;
+	cursor: pointer;
+}
+#close:hover {
+  box-shadow: 0 0 8px yellow;
+}
+
+#action1 {
+    margin-left: 15px;
+    border: 1px solid grey;
+    background-color: #ff4d4d;
+    border-radius: .4em;
+    padding: 3px;
+	cursor: pointer;
+}
+
+#action1:hover {
+    margin-left: 15px;
+    border: 1px solid grey;
+    background-color: grey;
+    border-radius: .4em;
+    padding: 3px;
+}
+   
+
+
+
+
+
+/*    Boite de recherche de texte dans la sidebar      */
+#findbox {
+	background: white;
+    border-radius: .125em;
+    box-shadow: 0 0 8px #999;
+	margin-left: 110px;
+    margin-top: 10px;
+    padding: 2px 0;
+    width: 160px;;
+    height: 26px;
+	margin-left: 110px;
+}
+
+/*  FIN  SIDEBAR      */
+
+
+
+
+
+
+
+
+.box {
+  font-size: 12px; 
+  color:black; 
+  font-weight: bold;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+.box11 {
+
+  font-size: 16px; 
+  color:red; 
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.box22 {
+  font-size: 14px; 
+  color:red; 
+  font-weight: bold;
+  margin-left: 50px;
+}
+
+
+
+/*    Texte dans le Sidebar     */
+
+
+.line{
+    width: 90%;
+    border-bottom: 1px solid #078BAB;
+    position: absolute;
+    left: 4%;
+    }
+
+/*    fenêtre d'information     */
+.test-test-debut {
+    display:none
+}
+
+.test-test {
+	position: absolute;
+    z-index: 1000;
+    background: #078BAB;
+    padding: 10px;
+    right: 0;
+    margin: 10px;
+    min-height: 200px;
+    width: 400px;
+    left: 27%;
+	border-radius: .125em;
+    box-shadow: 0 0 10px #999;
+}
+/*    fin de la fenêtre d'information     */
+
+
+
+.logouda {
+	position: absolute;
+    height: 35px;
+	top : 10px;
+	left : 10px;
+}
+
+/*    Texte dans le Sidebar     */
+.head {
+	background: black;
+    width: 100%;
+    height: 26px;
+}
+
+
+
+
+
+
+
+/*    Modification du style des popup      */
+.leaflet-popup-content-wrapper {
+		border : #078BAB;
+		border-radius : 1;
+		background : white;
+		color : grey;
+		font-size : 12px;
+		font-weight: bold;
+		opacity : 0.95;
+		 padding: 0.5px;
+        text-align: left;
+        border-radius: 4px;
+		}
+		
+		.leaflet.popup-content {
+		margin : 10px;
+		cursor: pointer;
+		}
+		
+		.leaflet.popup-tip-container {
+		background : grey;
+		}
+/*   FIN Modification du style des popup      */
+
+
+
+
+/*   Control layer      */		
+.leaflet-control-layers-expanded {
+ color : grey;	
+ font-size : 12px;
+}
+
+
+/*    Boite de recherche de texte dans la sidebar      */
+.search-tooltip {
+	width: 200px;
+}
+.leaflet-control-search .search-cancel {
+	position: static;
+	float: left;
+	margin-left: -22px;
+}
+
+
+
+
+
+
+
+
+	 
+
+
+

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo - Laurent Savard</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet.js"></script>
+	
+	
+	<link rel="stylesheet" href="css/leaflet-search.css" />
+    <script src="js/leaflet-search.js"></script>
+	
+	
+	
+	
+	
+	
+	<script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="leaflet.zoomhome.css"/>
+    <script src="leaflet.zoomhome.min.js"></script>
+	
+	
+    <style>
+	    #map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
+	</style>
+</head>
+<body>
+
+    <div id = "map"></div>
+	<div id="bar"></div>
+
+    <script>
+	    var map = L.map('map', {zoomControl: false}).setView([46.177152, -73.831691],9);
+		
+		L.control.scale().addTo(map);
+		var controlLayers = L.control.layers().addTo(map);
+		
+		//SEARCH BAR
+        var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+        var results = new L.LayerGroup().addTo(map);
+
+        searchControl.on('results', function(data){
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+        results.addLayer(L.marker(data.results[i].latlng));
+        }
+        });
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		// ZOOM HOME
+		var zoomHome = L.Control.zoomHome();
+        zoomHome.addTo(map);
+		
+	
+		//MAP TILER BASEMAP
+		var tile_ = L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=XCT8ZBBTXdhrjQXORobg', {
+		attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+	    }).addTo(map);
+		controlLayers.addOverlay(tile_, "Basemap - Street");
+		
+		
+		
+		//TEST WMS RELIEF MFFP
+		var wmsLayer = L.tileLayer.wms('https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?', {
+        layers: 'lidar_ombre'
+        })
+		controlLayers.addOverlay(wmsLayer, "Relief wms MFFP");
+		
+		//TEST WMS CARTE ECO MFFP
+		var wmsLayer = L.tileLayer.wms('https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?', {
+        layers: 'ori_pee_ori_prov'
+        })
+		controlLayers.addOverlay(wmsLayer, "Carte Eco wms MFFP");
+		
+				
+		//ESRI BASEMAP
+		var esribasemap = L.esri.basemapLayer('Imagery');
+        L.esri.basemapLayer('ImageryLabels');
+		controlLayers.addOverlay(esribasemap, "Basemap - Esri");
+		
+
+		L.marker([46.177152, -73.831691]).addTo(map)
+        .bindPopup("Bassin versant de la riviere l'Assomption")
+        .openPopup();
+		
+        //HYDRO TILEMAP
+		var tile2 = L.tileLayer('Tile/test/{z}/{x}/{y}.png', {
+	    })
+		controlLayers.addOverlay(tile2, "GRHQ TileMap");
+		
+		
+		//BASSIN VERSANT
+		// symbologie du bassin versant
+		function style(feature) {
+        return {
+        fillColor: '#ECFB03',
+        weight: 1,
+        opacity: 1,
+        color: 'red',
+        dashArray: '3',
+        fillOpacity: 0.3
+        };
+        }
+		
+	   $.getJSON("data/BV_Assomption2.geojson",function(data){
+       var datalayer = L.geoJson(data ,{
+	   style: style,
+       onEachFeature: function(feature, featureLayer) {
+	   featureLayer.bindPopup(feature.properties.NOM_COURS_);
+       }
+       }).addTo(map);
+	   controlLayers.addOverlay(datalayer, "BV Riviere l'Assomption");
+       });
+	   
+	   //REFUGE BIO
+       $.getJSON("data/Refuge_Bio.geojson",function(data){
+       var datalayer = L.geoJson(data ,{
+       onEachFeature:function(feature, featureLayer) {
+	   featureLayer.bindPopup(feature.properties.REF_STATU);
+       }
+       })
+	   controlLayers.addOverlay(datalayer, 'Refuge biologique');
+       });
+	   
+	   //CADASTRE
+       var cadastre = $.getJSON("data/cad.geojson",function(data){
+       var datalayer = L.geoJson(data ,{
+       onEachFeature:function(feature, featureLayer) {
+	   featureLayer.bindPopup(feature.properties.NO_LOT);
+       }
+       })
+	   controlLayers.addOverlay(datalayer, 'Cadastre TC');
+       });
+
+	   //POINT D'EAU
+       var pointeau = $.getJSON("data/point_eau.geojson",function(data){
+	   var ratIcon = L.icon({
+       iconUrl: 'icone/eau.png',
+       iconSize: [20,20]
+       }); 
+       var datalayer = L.geoJson(data ,{
+	   pointToLayer: function(feature,latlng){
+	   var marker = L.marker(latlng,{icon: ratIcon});
+	   const p = feature.properties
+       marker.bindPopup("niveau d'eau: "+feature.properties.valeur+ '<br/>' + feature.properties.remarque+ '<br/>' + "Laurent Savard");
+       return marker; 
+       }
+       })
+	   controlLayers.addOverlay(datalayer, 'Point eau');
+       });
+	   
+	   //POINT D'EAU avec symbologie
+	   function test(d) {
+	   if (d <= 5) {
+       var ratIcon = L.icon({
+       iconUrl: 'icone/eau1.png',
+       iconSize: [25,25]
+       }); 
+       return ratIcon;
+	   }
+	   if (d > 5) {
+       var ratIcon = L.icon({
+       iconUrl: 'icone/eau2.png',
+       iconSize: [30,30]
+       }); 
+       return ratIcon;
+	   }
+       }
+	   
+	   $.getJSON("data/point_eau2.geojson",function(data){
+       var datalayer = L.geoJson(data ,{
+	   pointToLayer: function(feature,latlng){
+	   var marker = L.marker(latlng,{icon: test(feature.properties.valeur)});
+       marker.bindPopup("niveau d'eau: "+feature.properties.valeur+ '<br/>' + feature.properties.remarque+ '<br/>' + "Laurent Savard");
+       return marker; 
+       }
+       })
+	   controlLayers.addOverlay(datalayer, 'Point eau - symbologie');
+       });
+	   
+	   
+	   
+	   // CARTE ECO 
+	   function getColor(d) {
+	   if (d == 'resineux') {
+       var aa = '#32CD32'
+       return aa;
+	   }
+	   if (d == 'mixte') {
+       var aa = '#FFFF00' 
+       return aa;
+	   }
+	   if (d == 'feuillus') {
+       var aa = '#FFA500';
+       return aa;
+	   }
+	   }
+	 	   
+	    function style3(feature) {
+        return {
+        fillColor: getColor(feature.properties.type),
+        weight: 1,
+        opacity: 1,
+        color: 'black',
+        dashArray: '0',
+        fillOpacity: 0.5
+        };
+        }
+		
+	   $.getJSON("data/carte_eco5.geojson",function(data){
+       var datalayer = L.geoJson(data ,{
+	   style: style3,
+       onEachFeature: function(feature, featureLayer) {
+	   featureLayer.bindPopup(feature.properties.type);
+       }
+       })
+	   controlLayers.addOverlay(datalayer, "carte_eco");
+       });
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   // TEST SEARCH STEPHANO
+		var markersLayer = new L.LayerGroup();	//layer contain searched elements
+	
+	    map.addLayer(markersLayer);
+
+	    var controlSearch = new L.Control.Search({
+		position:'topright',		
+		layer: markersLayer,
+		initial: false,
+		zoom: 12,
+		marker: false
+	    });
+
+	    map.addControl( controlSearch );
+
+	    ////////////populate map with markers from sample data
+	    for(i in pointeau) {
+		var title = datalayer[i].remarque,
+			loc = datalayer[i].coordinates,		//position found
+			marker = new L.Marker(new L.latLng(loc), {title: title} );//se property searched
+		marker.bindPopup('title: '+ title );
+		markersLayer.addLayer(marker);
+	    }
+		
+		//console.log();
+	   
+	  
+	   
+	   
+	   
+	   
+	   
+	   
+       
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+
+	   
+	   
+	   
+	   
+	   
+	   
+
+
+      
+    </script>
+</body>
+</html>

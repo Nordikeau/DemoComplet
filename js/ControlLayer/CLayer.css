@@ -1,0 +1,6 @@
+body { margin:0; padding:0; }
+#map { position:absolute; top:0; bottom:0; width:100%; }
+.controlHeading { font-size: 1.7em; }
+
+/* leaflet layers control plugin css */
+.leaflet-control-layers-group-name{font-weight:700;margin-bottom:.2em;margin-left:3px}.leaflet-control-layers-group{margin-bottom:.5em}

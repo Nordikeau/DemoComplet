@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo - Laurent Savard</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <style>
+	    #map {position: absolute; top: 0; bottom: 0; left: 0; right: 0;}
+	</style>
+</head>
+<body>
+
+    <div id = "map"></div>
+
+    <script>
+	    var map = L.map('map').setView([46.177152, -73.831691],9);
+		
+
+		var tile_ = L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=XCT8ZBBTXdhrjQXORobg', {
+		attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+	    }).addTo(map);
+        
+		L.marker([46.177152, -73.831691]).addTo(map)
+        .bindPopup("Bassin versant de la riviere l'Assomption")
+        .openPopup();
+		
+        var mylayer = L.layerGroup().addTo( map )
+		//BASSIN VERSANT
+		// symbologie du bassin versant
+		function style(feature) {
+        return {
+        fillColor: '#ECFB03',
+        weight: 1,
+        opacity: 1,
+        color: 'red',
+        dashArray: '3',
+        fillOpacity: 0.3
+        };
+        }
+		
+	   $.getJSON("data/BV_Assomption2.geojson",function(data){
+       var datalayer = L.geoJson(data ,{
+	   style: style,
+	   onEachFeature: addMyData,
+       onEachFeature: function(feature, featureLayer) {
+	   featureLayer.bindPopup(feature.properties.NOM_COURS_);
+       }
+       }).addTo(map);
+       map.fitBounds(datalayer.getBounds());
+       });
+	   
+	   //REFUGE BIO
+       $.getJSON("data/Refuge_Bio.geojson",function(data){
+       var datalayer = L.geoJson(data ,{
+	   onEachFeature: addMyData,
+       onEachFeature: function(feature, featureLayer) {
+	   featureLayer.bindPopup(feature.properties.REF_STATU);
+       }
+       });
+       map.fitBounds(datalayer.getBounds());
+       });
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   function addMyData( feature, layer ){
+       mylayer.addLayer( layer )
+       }
+	   
+	   var basemapControl = {
+       "My Basemap": tile_, // an option to select a basemap (makes more sense if you have multiple basemaps)
+       }
+      var layerControl = {
+      "My Layer": mylayer, // an option to show or hide the layer you created from geojson
+      }
+       L.control.layers( basemapControl, layerControl ).addTo( map )
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   // LISTE DES COUCHES
+	  //var baseMaps = {"Basemap": tile_};
+	  //var couches = {"Couches": cc};
+	  //L.control.layers(baseMaps).addTo(map);
+
+
+      
+    </script>
+</body>
+</html>
