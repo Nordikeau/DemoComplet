@@ -18,7 +18,7 @@
     right: 0;
     width: 20%;
     z-index: 1000;
-    background: #F0F8FF;
+    background: white;
     height: 95%;
     bottom: 0;
 	box-shadow: 0 0 6px #999;
@@ -94,19 +94,17 @@
 /*    Boite de recherche de texte dans la sidebar      */
 #findbox {
 	background: white;
-    border-radius: .125em;
-    box-shadow: 0 0 8px #999;
+    border-radius: .3em;
 	margin-left: 110px;
     margin-top: 10px;
     padding: 2px 0;
     width: 160px;;
     height: 26px;
 	margin-left: 110px;
+	border: 1.5px solid grey;
 }
 
 /*  FIN  SIDEBAR      */
-
-
 
 
 
@@ -135,7 +133,20 @@
   margin-left: 50px;
 }
 
+.boxtele {
+  font-size: 11.5px; 
+  color:blue; 
+  margin-left: 15px;
+  margin-right: 10px;
+  padding : 1px;
+}
 
+.boxtele:hover {
+  font-size: 11.5px; 
+  color:red; 
+  margin-left: 15px;
+  margin-right: 10px; 
+}
 
 /*    Texte dans le Sidebar     */
 

@@ -32,6 +32,9 @@
 	<!-- AQ -->
 	<script src="js/AQ.js"></script>
 	
+	<!-- Actions -->
+	<script src="js/Actions.js"></script>
+	
 	<!-- Zoom home font  -->
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css"/>
@@ -67,7 +70,6 @@
 	<img src="icone/printer.svg" alt="HTML5" id="logoprint"  width="35" height="35"></div>
  <div id="sidebar">
    <div id="findbox"></div>
-   <p style="margin-left: 10px; font-size: 12px; color:black; font-weight:bold; "> Filtrer par propriétaire :</p>
    <br />
    <div id = "box1" class = "box11"></div>
    <div class="line"></div>
@@ -97,9 +99,9 @@
    <br />
    <div id = "box9" class = "box"></div>
    <br />
-   <div id = "box10" class = "box"></div>
-   <div id = "box11" class = "box"></div>
-   <div id = "box12" class = "box"></div>
+   <div id = "box10" class = "boxtele"></div>
+   <div id = "box11" class = "boxtele"></div>
+   <div id = "box12" class = "boxtele"></div>
    <br />
    <div id = "box13" class = "box"></div>
    <br />
@@ -316,11 +318,6 @@
 	   
 	   
 	   //REFUGE BIO
-	   
-	   
-	   
-	   
-	   
        $.getJSON("data/Refuge_Bio.geojson",function(data){
        var datalayer = L.geoJson(data ,{
        onEachFeature:function(feature, featureLayer) {
@@ -575,7 +572,7 @@
 			marker.bindPopup(container[0]);
             marker.on('click',  function (e) {
 			$('#box1').html(marker.feature.properties.NO_LOT);
-			$('#box2').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>▪ Propriétaire : </b>"+marker.feature.properties.NM_PROPR);
+			$('#box2').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>Propriétaire : </b>"+marker.feature.properties.NM_PROPR);
 			
 			$('#box2a').html("<b  style='color: grey;  font-size : 12px'>Contact : </b>"+marker.feature.properties.Contact);
 			$('#box2b').html("<b  style='color: grey;  font-size : 12px'>Adresse : </b>"+marker.feature.properties.Adresse1);
@@ -586,41 +583,45 @@
 			
 			$('#box2e').html("<b  style='color: grey;  font-size : 12px'>Lots appartenant à ce propriétaire : <br /> 4 567 345, 5 654 345 </b>");
 			
-			$('#box3').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>▪ Circonscription foncière : </b>"+marker.feature.properties.NM_CIRCN_F);
-			$('#box3a').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>▪ Ancien lot : </b>"+marker.feature.properties.Ancienlot);
-			$('#box3b').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>▪ Titre : </b>"+marker.feature.properties.Titre);
+			$('#box3').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Circonscription foncière : </b>"+marker.feature.properties.NM_CIRCN_F);
+			$('#box3a').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Ancien lot : </b>"+marker.feature.properties.Ancienlot);
+			$('#box3b').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Titre : </b>"+marker.feature.properties.Titre);
 			
-			$('#box5').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;    color: white;'> Cadre administratif</b><div class='line'></div>");
+			$('#box5').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em; background-color: #078BAB;    color: white;'> Cadre administratif</b><div class='line'></div>");
 			
 			
-			$('#box6').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>▪ Région administrative : </b>"+marker.feature.properties.RegAdm);
-			$('#box7').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>▪ MRC : </b>"+marker.feature.properties.MRC);
-			$('#box8').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>▪ Municipalité : </b>"+marker.feature.properties.Mun);
-			$('#box9').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;   color: white;'> Téléchargements</b><div class='line'></div>");
-			$('#box10').html("<a style = 'font-size: 11px; ' href='data/pdf/test.pdf' target='_blank'>Fiche du propriétaire (pdf)</a>");
-			$('#box11').html("<a style = 'font-size: 11px; ' href='data/pdf/test.pdf' target='_blank'>Plan de localisation (pdf)</a>");
-			$('#box12').html("<a style = 'font-size: 11px; ' href='data/pdf/test.pdf' target='_blank'>Documents administratifs (pdf)</a>");
-			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;   color: white;'> Historique</b><div class='line'></div>");
-			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>▪ Historique des contacts... </b>");
-			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;   color: white;'> Actions</b><div class='line'></div>");
+			$('#box6').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>Région administrative : </b>"+marker.feature.properties.RegAdm);
+			$('#box7').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>MRC : </b>"+marker.feature.properties.MRC);
+			$('#box8').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Municipalité : </b>"+marker.feature.properties.Mun);
+			$('#box9').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em; background-color: #078BAB;   color: white;'> Téléchargements</b><div class='line'></div>");
+			$('#box10').html("<a   href='data/pdf/test.pdf' target='_blank'>Fiche du propriétaire (pdf)</a>");
+			$('#box11').html("<a  href='data/pdf/test.pdf' target='_blank'>Plan de localisation (pdf)</a>");
+			$('#box12').html("<a href='data/pdf/test.pdf' target='_blank'>Documents administratifs (pdf)</a>");
+			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block;border-radius: .125em; background-color: #078BAB;   color: white;'> Historique</b><div class='line'></div>");
+			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Historique des contacts... </b>");
+			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB; border-radius: .125em;  color: white;'> Actions</b><div class='line'></div>");
 			$('#box16').html("<img src='icone/proprio.svg' alt='HTML5' id='action1'  width='20' height='20'>");
 
 			});
 			}
 			
 		//ACTIONS DE LA SIDEBAR
-	    function rr() {
-        $('#box16').html("<img src='icone/proprio.svg' alt='HTML5' id='action1'  width='20' height='20'><b style = 'font-size: 10px; color = 'grey'> Afficher les lots du même propriétaire</b>");
-        };
-		document.getElementById("box16").addEventListener('mouseover', rr);
+
 		
 		function rr2() {
-        $('#box16').html("<img src='icone/proprio.svg' alt='HTML5' id='action1'  width='20' height='20'>");
-        };
-		document.getElementById("box16").addEventListener('mouseout', rr2);
+		 if (map.hasLayer(cadproprio)) {
+                map.removeLayer(cadproprio);
+            }
+            else{
+                map.addLayer(cadproprio);
+            } ;
+		};
 		
-
-			
+	
+		
+		document.getElementById("box16").addEventListener('click', rr2);
+		
+        
 			
 			
 
@@ -704,6 +705,7 @@
 	 // Enlever la sélection
        map.on('click', onMapClick3);
 	   // ajouter moseover
+	
 	
 	
 
@@ -822,17 +824,17 @@ L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
 			$('#box3').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>▪ Circonscription foncière : </b>"+e.layer.feature.properties.NM_CIRCN_F);
 			$('#box3a').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>▪ Ancien lot : </b>"+e.layer.feature.properties.Ancienlot);
 			$('#box3b').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>▪ Titre : </b>"+e.layer.feature.properties.Titre);
-			$('#box5').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;   color: white;'> Cadre administratif</b><div class='line'></div>");
+			$('#box5').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display:border-radius: .125em; inline-block; background-color: #078BAB;   color: white;'> Cadre administratif</b><div class='line'></div>");
 			$('#box6').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>▪ Région administrative : </b>"+e.layer.feature.properties.RegAdm);
 			$('#box7').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>▪ MRC : </b>"+e.layer.feature.properties.MRC);
 			$('#box8').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>▪ Municipalité : </b>"+e.layer.feature.properties.Mun);
-			$('#box9').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;   color: white;'> Téléchargements</b><div class='line'></div>");
-			$('#box10').html("<a style = 'font-size: 10px; ' href='data/pdf/test.pdf' target='_blank'>Fiche du propriétaire (pdf)</a>");
-			$('#box11').html("<a style = 'font-size: 10px; ' href='data/pdf/test.pdf' target='_blank'>Plan de localisation (pdf)</a>");
-			$('#box12').html("<a style = 'font-size: 10px; ' href='data/pdf/test.pdf' target='_blank'>Documents administratifs (pdf)</a>");
-			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;  color: white;'> Historique</b><div class='line'></div>");
+			$('#box9').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em;background-color: #078BAB;   color: white;'> Téléchargements</b><div class='line'></div>");
+			$('#box10').html("<a   href='data/pdf/test.pdf' target='_blank'>Fiche du propriétaire (pdf)</a>");
+			$('#box11').html("<a  href='data/pdf/test.pdf' target='_blank'>Plan de localisation (pdf)</a>");
+			$('#box12').html("<a href='data/pdf/test.pdf' target='_blank'>Documents administratifs (pdf)</a>");
+			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em;background-color: #078BAB;  color: white;'> Historique</b><div class='line'></div>");
 			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>▪ Historique des contacts... </b>");
-			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;   color: white;'> Actions</b><div class='line'></div>");
+			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;border-radius: .125em;   color: white;'> Actions</b><div class='line'></div>");
 			$('#box16').html("<img src='icone/proprio.svg' alt='HTML5' id='action1'  width='20' height='20'>");
 		e.layer.setStyle({'color': 'red',weight: 3});
 		selected = e.layer;
