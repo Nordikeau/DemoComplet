@@ -69,6 +69,36 @@
   box-shadow: 0 0 8px yellow;
 }
 
+/*    action 1     */
+#coucheactive {
+	display: inline-block;
+    text-align: left;
+    font-size: 11px;
+    color: black;
+    font-weight: bold;
+    border: 2px solid #39e600;
+    background-color: #39e600;
+    border-radius: .2em;
+}
+
+#aaa {
+	display: inline-block;
+    text-align: left;
+    font-size: 11px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    border: 3px solid #8B0000;
+    background-color: #8B0000;
+    border-radius: .5em;
+    margin-left: 140px;
+    padding: 3px;
+}
+#aaa:hover {
+  background-color: grey;
+  border: 3px solid grey;
+}
+
 #action1 {
     margin-left: 15px;
     border: 1px solid grey;
@@ -85,7 +115,7 @@
     border-radius: .4em;
     padding: 3px;
 }
-   
+/*   Fin  action 1     */  
 
 
 
@@ -177,6 +207,31 @@
     box-shadow: 0 0 10px #999;
 }
 /*    fin de la fenêtre d'information     */
+
+
+
+/*    fenêtre action1    */
+.action1htc {
+    display:none
+}
+
+.action1htc2 {
+	position: absolute;
+    z-index: 1000;
+    background: #078BAB;
+    padding: 10px;
+    right: 0;
+    margin: 10px;
+    min-height: 50px;
+    width: 400px;
+    left: 27%;
+	border-radius: .125em;
+    box-shadow: 0 0 10px #999;
+}
+/*    fin fenêtre action1    */
+
+
+
 
 
 
