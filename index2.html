@@ -23,6 +23,11 @@
     <link rel="stylesheet" href="js/ControlLayer2/groupedlayercontrol.css" />
 	<link rel="stylesheet" href="js/ControlLayer2/groupedlayercontrol.min.css" />
 	
+	
+	
+	
+	<script src="js/WMS/leaflet.wms.js"></script>
+	
     <!-- Draw -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw-src.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
@@ -32,8 +37,7 @@
 	<!-- AQ -->
 	<script src="js/AQ.js"></script>
 	
-	<!-- Get feature info WMS -->
-    <script src="js/WMS/leaflet.wms.js"></script>
+
 	
 	<!-- Zoom home font  -->
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
@@ -249,13 +253,24 @@
 		
 		//TEST WMS CARTE ECO MFFP
 		//var wmsLayer2 = L.tileLayer.wms('https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?', {
-        //layers: 'ori_pee_ori_prov',
+       //layers: 'ori_pee_ori_prov',
 		//zIndex: 1
-        //})
-		// GET FEATURE INFO
-		var options = {'transparent': true, opacity: 0.7};
-        var source = L.WMS.source("https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?", options);
-        var wmsLayer2 = source.getLayer('ori_pee_ori_prov');
+       //})
+		
+
+
+
+		
+		var options = {'transparent': true};
+var source = L.WMS.source("https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?", options);
+var wmsLayer2 = source.getLayer('ori_pee_ori_prov');
+
+
+		
+		
+		
+		
+		
         
 		//TEST WMS ZONE AGRICOLE
 		var wmsLayer3 = L.tileLayer.wms('https://carto.cptaq.gouv.qc.ca/cgi-bin/cptaq?', {
@@ -264,15 +279,11 @@
         })
 		
 		//TEST WMS ZONE AGRICOLE
-		//var wmsLayer3a = L.tileLayer.wms('https://carto.cptaq.gouv.qc.ca/cgi-bin/cptaq?', {
-        //layers: 'decisions',
-		//transparent: true,
-        //format: 'image/png'
-        //})
-		// GET FEATURE INFO
-		var options = {'transparent': true,format: 'image/png'};
-        var source = L.WMS.source("https://carto.cptaq.gouv.qc.ca/cgi-bin/cptaq", options);
-        var wmsLayer3a = source.getLayer('decisions');
+		var wmsLayer3a = L.tileLayer.wms('https://carto.cptaq.gouv.qc.ca/cgi-bin/cptaq?', {
+        layers: 'decisions',
+		transparent: true,
+        format: 'image/png'
+        })
 		
 		//TEST WMS ZONE AGRICOLE
 		var wmsLayer3b = L.tileLayer.wms('https://carto.cptaq.gouv.qc.ca/cgi-bin/cptaq?', {
@@ -290,7 +301,6 @@
         transparent: true,
         format: 'image/png'
         })
-
 
         //TEST WMS ORTHO MFFP
 		var wmsLayer5 = L.tileLayer.wms('https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wms/Inventaire_Ecoforestier?', {
