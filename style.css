@@ -7,7 +7,7 @@
 }
 
 #map {
-  width: 84%;
+  width: 82%;
   height : 100%;
   position : absolute;
   right:0;
@@ -16,7 +16,7 @@
 /*    SIDEBAR      */
 #sidebar {
     position: absolute;
-    width: 300px;
+    width: 18%;
     z-index: 1000;
     background: white;
     height: 100%;
@@ -28,7 +28,7 @@
 #head2 {
 	position: absolute;
     background: #078BAB;
-    width: 300px;
+    width: 100%;
     height: 5%;
     z-index: 1000;
 }
