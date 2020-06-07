@@ -7,9 +7,10 @@
 }
 
 #map {
-  width: 100%;
+  width: 78%%;
   height : 100%;
   position : absolute;
+  right:0;
 }
 
 /*    SIDEBAR      */
@@ -132,9 +133,6 @@
 /*  FIN  SIDEBAR      */
 
 
-.leaflet-left .leaflet-control {
-   margin-left:305px;
-}
 
 
 
