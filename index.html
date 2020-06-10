@@ -35,6 +35,11 @@
 	<!-- Get feature info WMS -->
     <script src="js/WMS/leaflet.wms.js"></script>
 	
+	<!-- geoJson - VT -->
+	<script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script>
+	
+	
+	
 	<!-- Zoom home font  -->
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css"/>
@@ -69,9 +74,18 @@
 	<br />
 	<br />
 	<div id = "proprioactif" style="text-align:left;display: inline-block; padding: 4px;     background-color: #f4f4f4;   font-size: 14px; color:black; font-weight:bold; " ></div>
+	<br />
+	<br />
 	<div id = "p1" class = "box"></div>
+	<br />
 	<div id = "p2" class = "box"></div>
 	<p id = aaa >ENLEVER LA COUCHE</p>
+	</div>
+	
+<!--action2  -->	
+<div id="action2ht" class = "action2htc">
+	<p style="text-align:left; font-size: 12px; color:grey; font-weight:bold; "> Filtrer par : ex. Tenure, proprietaire etc...</p>
+	<p id = bbb >FERMER</p>
 	</div>
  
  <div id="sidebar">
@@ -88,7 +102,7 @@
    <div id="findbox"></div>
    <br />
    <div id = "box1" class = "box11"></div>
-   <div class="line"></div>
+   <div class="line0"></div>
    <br />
    <div id = "box2" class = "box"></div>
    <br />
@@ -96,8 +110,6 @@
    <div id = "box2b" class = "box"></div>
    <div id = "box2c" class = "box"></div>
    <div id = "box2d" class = "box"></div>
-   <br />
-   <div id = "box2e" class = "box"></div>
    <br />
    <div id = "box3" class = "box"></div>
    <br />
@@ -124,8 +136,8 @@
    <div id = "box14" class = "box"></div>
    <br />
    <div id = "box15" class = "box"></div>
-   <br />
    <div id = "box16" ></div>
+   <div id = "box17" ></div>
    
    
  
@@ -158,7 +170,6 @@
 		document.getElementById("close").addEventListener("click", bb);
 		
 		//PANES
-		
 		map.createPane("pane450").style.zIndex = 450;
 		
 		//SCALE BAR
@@ -166,13 +177,11 @@
 		//var controlLayers = L.control.layers().addTo(map);
 		
 		
-		
 		// ZOOM HOME
 		var zoomHome = L.Control.zoomHome();
         zoomHome.addTo(map);
 		
-	    
-		
+	    		
 		//DRAW PLUGINS
 		var drawnItems = new L.FeatureGroup();
         map.addLayer(drawnItems);
@@ -249,7 +258,6 @@
         layers: 'lidar_ombre'
         })
 		
-
 		
 		//TEST WMS CARTE ECO MFFP
 		//var wmsLayer2 = L.tileLayer.wms('https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?', {
@@ -286,8 +294,7 @@
 		opacity: 0.5
         })
 		
-		
-		
+			
 		//TEST WMS MILIEUX HUMIDES CIC
 		var wmsLayer4 = L.tileLayer.wms('https://maps.ducks.ca/arcgis/services/Public/QC_Carto_MH_sudqc_mai2019/MapServer/WMSServer', {
         layers: '1',
@@ -319,15 +326,7 @@
         L.esri.basemapLayer('Imagery');
 		zIndex: 1
 	
-		
-         //TEST MARKER
-		//L.marker([46.177152, -73.831691]).addTo(map)
-        //.bindPopup("Bassin versant de la riviere l'Assomption")
-        //.openPopup();
-		
-        
-	
-		
+
 		//LABEL CAD
 		var tile3 = L.tileLayer('tilelabel10/{z}/{x}/{y}.png', {
         minZoom: 16,
@@ -351,8 +350,6 @@
         fillOpacity: 0.3
         };
         }
-	
-
 
        var data = bv;
        var bv1 = L.geoJson(data ,{
@@ -361,10 +358,6 @@
 	   featureLayer.bindPopup(feature.properties.NOM_COURS_);
        }
        });
-	   
-	   
-	   
-	   
 	   
 	   //REFUGE BIO
        $.getJSON("data/Refuge_Bio.geojson",function(data){
@@ -376,32 +369,6 @@
 	  
        });
 	   
-	   //CADASTRE
-       //$.getJSON("data/cad.geojson",function(data){
-       //var datalayer = L.geoJson(data ,{
-       //onEachFeature:function(feature, featureLayer) {
-	   //featureLayer.bindPopup(feature.properties.NO_LOT);
-       //}
-       //})
-	 
-       //});
-	   
-
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-
 
 	   //POINT D'EAU
 	   //Highlight
@@ -442,16 +409,7 @@
        map.on('click', onMapClick2);
 	   // ajouter moseover
 
-
-
-
-	   
-	   
-	   
-	   
-	   
-	   
-	   
+  
 	   //POINT D'EAU avec symbologie
 	   function test(d) {
 	   if (d <= 5) {
@@ -618,10 +576,7 @@
 			
 			// div invisible - valeur de proprietaire //
 			$('#proprio').html(marker.feature.properties.NM_PROPR);
-			
-			
-			
-			
+
 			$('#box1').html(marker.feature.properties.NO_LOT);
 			$('#box2').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>Propriétaire : </b>"+marker.feature.properties.NM_PROPR);
 			
@@ -629,10 +584,8 @@
 			$('#box2b').html("<b  style='color: grey; font-weight: 100; font-size : 12px'>Adresse : </b>"+marker.feature.properties.Adresse1);
 			$('#box2c').html(marker.feature.properties.Adresse2);
 			$('#box2d').html("<b  style='color: grey;font-weight: 100;  font-size : 12px'>No. de téléphone : </b>"+marker.feature.properties.Tel);
+
 			
-			
-			
-			$('#box2e').html("<b  style='color: grey; font-weight: 100; font-size : 12px'>Lots appartenant à ce propriétaire : <br /> 4 567 345, 5 654 345 </b>");
 			
 			$('#box3').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Circonscription foncière : </b>"+marker.feature.properties.NM_CIRCN_F);
 			$('#box3a').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Ancien lot : </b>"+marker.feature.properties.Ancienlot);
@@ -651,17 +604,15 @@
 			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block;border-radius: .125em; background-color: #078BAB;   color: white;'> Historique</b><div class='line'></div>");
 			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Historique des contacts... </b>");
 			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB; border-radius: .125em;  color: white;'> Actions</b><div class='line'></div>");
-			$('#box16').html("<img src='icone/proprio.svg' alt='HTML5' id='action1'  width='20' height='20'>");
-
+			$('#box16').html("<p id='action1'  >Afficher les lots appartenant à ce propriétaire</p>");
+            $('#box17').html("<p id='action1'  >Filtre avancée</p>");
 			});
 			}
 			
 		//ACTIONS1 DE LA SIDEBAR
-        
 		var action1;
 		var featureGroup = L.featureGroup();
 	
-		
         function create(){
 		// prendre la valeur de propriétaire
 		bb = document.getElementById("proprio");
@@ -670,16 +621,20 @@
 		$('#proprioactif').html(action1);
 		
 		// Creer la coiche filtrer
+		listeLots = []; 
 		var data = cadd;
 	    var cadproprio = new L.GeoJSON(data, {
 		style: style3,
 		filter: function(feature, layer) {
         return feature.properties.NM_PROPR == action1;
-            }
-			
+            },
+		onEachFeature: function(feature, layer) {
+		listeLots.push(feature.properties.NO_LOT);
+		}
 			})
 			return cadproprio;
 			}
+		
 		function style3(feature) {
         return {
         fillColor: 'yellow',
@@ -688,31 +643,29 @@
         };
         }
         
-
-		
-		function rr2() {
-        if (map.hasLayer(featureGroup)) {
+		function rr2() {	
+		   if (map.hasLayer(featureGroup)) {
         featureGroup.clearLayers();
 		map.removeLayer(featureGroup);
-		//Fermer la fenêtre
-		document.getElementById("action1ht").className = "action1htc";
             }
-            else{
-			     
+      
 			    var layerp = create();
+				//Liste des lots du propriétaire
+				console.log(listeLots);
+				listeLots.sort();
+				
 				featureGroup.addLayer(layerp);
 				featureGroup.addTo(map);
-				var list = ["4 564 543", " 4 543 345", " 6 333 456 "];
-				var Nblist = "3";
+				var Nblist = listeLots.length;
 				// Les infos pour la fenêtre de action1
-			    $('#p1').html("<b  style='color: grey;font-weight: 100; margin-left: -15px; font-size : 13px'>Listes de lots de ce propriétaire : </b>"+list);
+			    $('#p1').html("<b  style='color: grey;font-weight: 100; margin-left: -15px; font-size : 13px'>Listes de lots de ce propriétaire : </b>"+listeLots);
 			    $('#p2').html("<b  style='color: grey; margin-left: -15px; font-weight: 100; font-size : 13px'>Nombre de lots : </b>"+Nblist);
 				//Ouvrir la fenêtre
 				document.getElementById("action1ht").className = "action1htc2";
 				featureGroup.bringToBack();
-            } ;
+          
 		};
-		
+
 		document.getElementById("box16").addEventListener('click', rr2);
 		
 		function bb1() {
@@ -725,12 +678,38 @@
         };
 		document.getElementById("aaa").addEventListener("click", bb1);
 
-		
-        
-		
-			
 
+
+
+
+		//ACTIONS2 DE LA SIDEBAR
+        
+		document.getElementById("box17").addEventListener('click', rr3);
 			
+        function rr3() {	
+		//Ouvrir la fenêtre
+		document.getElementById("action2ht").className = "action2htc2";
+		};
+		
+
+        function bb2() {
+		//Ferme la fenêtre
+        document.getElementById("action2ht").className = "action2htc";
+        };
+		document.getElementById("bbb").addEventListener("click", bb2);
+
+
+
+
+
+
+
+
+
+
+
+
+		
 			//TEST LABEL1
 			//marker.bindTooltip(function (layer) {
             //return layer.feature.properties.NO_LOT;
@@ -931,9 +910,7 @@ L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
 			$('#box2c').html(e.layer.feature.properties.Adresse2);
 			$('#box2d').html("<b  style='color: grey; font-weight: 100; font-size : 12px'>No. de téléphone : </b>"+e.layer.feature.properties.Tel);
 			
-			
-			
-			$('#box2e').html("<b  style='color: grey;font-weight: 100;  font-size : 12px'>Lots appartenant à ce propriétaire : <br /> 4 567 345, 5 654 345 </b>");
+
 			
 			$('#box3').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Circonscription foncière : </b>"+e.layer.feature.properties.NM_CIRCN_F);
 			$('#box3a').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Ancien lot : </b>"+e.layer.feature.properties.Ancienlot);
@@ -949,7 +926,8 @@ L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
 			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em;background-color: #078BAB;  color: white;'> Historique</b><div class='line'></div>");
 			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Historique des contacts... </b>");
 			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;border-radius: .125em;   color: white;'> Actions</b><div class='line'></div>");
-			$('#box16').html("<img src='icone/proprio.svg' alt='HTML5' id='action1'  width='20' height='20'>");
+			$('#box16').html("<p id='action1'  >Afficher les lots appartenant à ce propriétaire</p>");
+			$('#box17').html("<p id='action1'  >Filtre avancée</p>");
 		e.layer.setStyle({'color': 'red',weight: 3});
 		selected = e.layer;
 		if(e.layer._popup)
@@ -972,7 +950,6 @@ L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
 	   $('#box2b').html("");
 	   $('#box2c').html("");
 	   $('#box2d').html("");
-	   $('#box2e').html("");
 	   $('#box3').html("");
 	   $('#box3a').html("");
 	   $('#box3b').html("");
@@ -989,6 +966,7 @@ L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
 	   $('#box14').html("");
 	   $('#box15').html("");
 	   $('#box16').html("");
+	   $('#box17').html("");
        };	
 	
 	    // Enlever la sélection
