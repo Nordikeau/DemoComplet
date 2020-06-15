@@ -55,6 +55,9 @@
 	
 	<link rel="stylesheet" href="style.css" />
 	
+	<!-- Style des actions de la sidebar  -->
+	<link rel="stylesheet" href="css/action-uda.css"/>
+	
 	
     <style>
 	
@@ -86,7 +89,14 @@
 	
 <!--action2  -->	
 <div id="action2ht" class = "action2htc">
-	<p style="text-align:left; font-size: 12px; color:grey; font-weight:bold; "> Filtrer par : ex. Tenure, proprietaire etc...</p>
+	<p style="text-align:left; font-size: 12px; color:grey; font-weight:bold; "> Filtrer par :</p>
+	<b id = Filtre1 >PUBLIQUE</b>
+	<br />
+	<b id = Filtre1 >PRIVÉE</b>
+	<br />
+	<b id = Filtre1 >MUNICIPALE</b>
+	<br />
+	<b id = Filtre1 >PROPRIÉTÉ DE TC ENERGY</b>
 	<p id = bbb >FERMER</p>
 	</div>
  
@@ -349,7 +359,7 @@
 		var vectorGrid = L.vectorGrid.slicer( testvt, {
 			rendererFactory: L.svg.tile,
 			pane: 'labels',
-			  minZoom: 15,
+			  minZoom: 14,
        maxZoom: 18,
 			vectorTileLayerStyles: {
 				sliced: function(properties, zoom) {
