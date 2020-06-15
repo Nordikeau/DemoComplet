@@ -35,8 +35,10 @@
 	<!-- Get feature info WMS -->
     <script src="js/WMS/leaflet.wms.js"></script>
 	
-	<!-- geoJson - VT -->
-	<script src="https://unpkg.com/geojson-vt@3.2.0/geojson-vt.js"></script>
+	<!-- VectorGrid -->
+	<script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
+	<script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.js"></script>
+	<script src="data/hydro2020.js"></script>
 	
 	
 	
@@ -334,6 +336,86 @@
         tms: false,
         pane: 'labels'
         }).addTo(map);
+		
+		
+		// TEST VECTORTILES
+		var highlight;
+		var clearHighlight = function() {
+			if (highlight) {
+				vectorGrid.resetFeatureStyle(highlight);
+			}
+			highlight = null;
+		};
+		var vectorGrid = L.vectorGrid.slicer( testvt, {
+			rendererFactory: L.svg.tile,
+			pane: 'labels',
+			  minZoom: 15,
+       maxZoom: 18,
+			vectorTileLayerStyles: {
+				sliced: function(properties, zoom) {
+					return {
+						//fillColor: '#800026',
+						//fillOpacity: 0.5,
+	 					//fillOpacity: 1,
+						//stroke: true,
+						//fill: true,
+						color: 'blue',
+ 							//opacity: 0.2,
+						weight: 1,
+					}
+				}
+			},
+			interactive: true,
+			getFeatureId: function(f) {
+				return f.properties.OBJECTID;
+			}
+		})
+		.on('mouseover', function(e) {
+			var properties = e.layer.properties;
+			L.popup()
+				.setContent(properties.NO_BV)
+				.setLatLng(e.latlng)
+				.openOn(map);
+
+			clearHighlight();
+			highlight = properties.OBJECTID;
+
+			
+			var style = {
+				//fillColor: '#800026',
+				//fillOpacity: 0.5,
+				//fillOpacity: 1,
+				//stroke: true,
+				//fill: true,
+				color: 'red',
+				//opacity: 1,
+				weight: 2,
+			};
+
+			vectorGrid.setFeatureStyle(properties.OBJECTID, style);
+		})
+		//.addTo(map);
+
+		map.on('click', clearHighlight);
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -821,7 +903,8 @@
   "<b style = ' font-size: 12px; border: 1px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>COUCHES</b>" : {
 	"Cadastre (Recherche)": featuresLayer,
 	"Point d'eau" : pteau1,
-	"Bassin versant de l'Assomption" : bv1
+	"Bassin versant de l'Assomption" : bv1,
+	"Hydrographie (VT)" : vectorGrid
 	
   },
   "<b style='font-size: 12px; border: 1px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>FONDS DE CARTE</b>": {
