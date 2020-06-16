@@ -90,14 +90,16 @@
 <!--action2  -->	
 <div id="action2ht" class = "action2htc">
 	<p style="text-align:left; font-size: 12px; color:grey; font-weight:bold; "> Filtrer par :</p>
-	<b id = Filtre1 >PUBLIQUE</b>
+	<b id = Filtre1 class = "Filtre1">PUBLIQUE</b>
 	<br />
-	<b id = Filtre1 >PRIVÉE</b>
+	<b id = Filtre2 class = "Filtre1">PRIVÉE</b>
 	<br />
-	<b id = Filtre1 >MUNICIPALE</b>
+	<b id = Filtre3 class = "Filtre1" >MUNICIPALE</b>
 	<br />
-	<b id = Filtre1 >PROPRIÉTÉ DE TC ENERGY</b>
+	<b id = Filtre4 class = "Filtre1">PROPRIÉTÉ DE TC ENERGY</b>
 	<p id = bbb >FERMER</p>
+	<b id = "coucheactive2" class = "coucheactive2a" >Couche de sélection active : </b>
+	<div id = "F2-1" ></div>
 	</div>
  
  <div id="sidebar">
@@ -148,6 +150,7 @@
    <div id = "box14" class = "box"></div>
    <br />
    <div id = "box15" class = "box"></div>
+   <br />
    <div id = "box16" ></div>
    <div id = "box17" ></div>
    
@@ -332,6 +335,27 @@
         transparent: true,
         format: 'image/png'
         })
+		
+		var wmsLayer8 = L.tileLayer.wms('https://www.servicesgeo.enviroweb.gouv.qc.ca/donnees/services/Public/Themes_publics/MapServer/WMSServer?', {
+        layers: 'Territoires d_importance pour la conservation',
+        transparent: true,
+        format: 'image/png'
+        })
+		
+		var wmsLayer9 = L.tileLayer.wms('https://www.servicesgeo.enviroweb.gouv.qc.ca/donnees/services/Public/Themes_publics/MapServer/WMSServer?', {
+        layers: 'Ensemble des aires protégées',
+        transparent: true,
+        format: 'image/png'
+        })
+		
+		var wmsLayer10 = L.tileLayer.wms('https://www.servicesgeo.enviroweb.gouv.qc.ca/donnees/services/Public/Themes_publics/MapServer/WMSServer?', {
+        layers: 'Polygones de zones inondables',
+        transparent: true,
+        format: 'image/png'
+        })
+		
+		
+		
 		
 		//ESRI BASEMAP
 		var esribasemap = L.esri.basemapLayer('Imagery');
@@ -696,8 +720,8 @@
 			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block;border-radius: .125em; background-color: #078BAB;   color: white;'> Historique</b><div class='line'></div>");
 			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Historique des contacts... </b>");
 			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB; border-radius: .125em;  color: white;'> Actions</b><div class='line'></div>");
-			$('#box16').html("<p id='action1'  >Afficher les lots appartenant à ce propriétaire</p>");
-            $('#box17').html("<p id='action1'  >Filtre avancée</p>");
+			$('#box16').html("<b id='action1'  >Afficher les lots appartenant à ce propriétaire</b>");
+            $('#box17').html("<b id='action1'  >Filtre avancée</b>");
 			});
 			}
 			
@@ -789,11 +813,15 @@
         document.getElementById("action2ht").className = "action2htc";
         };
 		document.getElementById("bbb").addEventListener("click", bb2);
+        //fin
+		
+        document.getElementById("Filtre1").addEventListener('click', rr4);
 
-
-
-
-
+        function rr4() {	
+		//afficher la couche active
+		document.getElementById("coucheactive2").className = "coucheactive2a2";
+		$('#F2-1').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>Tenure publique</b>");
+		};
 
 
 
@@ -930,7 +958,10 @@
 	"Zone agricole (WMS)" : wmsLayer3,
 	"Decisions (WMS)" : wmsLayer3a,
 	"Decisions numéro	(WMS)" : wmsLayer3b,
-	"Milieux humides CIC (WMS)" : wmsLayer4
+	"Milieux humides CIC (WMS)" : wmsLayer4,
+	"Aire protégées (WMS)" : wmsLayer8,
+	"Aire protégées-registre (WMS)" : wmsLayer9,
+	"Zones inondables-BDZI(WMS)" : wmsLayer10
   },
   "<b style='font-size: 12px; border: 1px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>AUTRES</b>": {
 	"Couche éditable" : drawnItems
@@ -1019,8 +1050,8 @@ L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
 			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em;background-color: #078BAB;  color: white;'> Historique</b><div class='line'></div>");
 			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Historique des contacts... </b>");
 			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;border-radius: .125em;   color: white;'> Actions</b><div class='line'></div>");
-			$('#box16').html("<p id='action1'  >Afficher les lots appartenant à ce propriétaire</p>");
-			$('#box17').html("<p id='action1'  >Filtre avancée</p>");
+			$('#box16').html("<b id='action1'  >Afficher les lots appartenant à ce propriétaire</b>");
+            $('#box17').html("<b id='action1'  >Filtre avancée</b>");
 		e.layer.setStyle({'color': 'red',weight: 3});
 		selected = e.layer;
 		if(e.layer._popup)
