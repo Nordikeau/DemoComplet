@@ -89,7 +89,7 @@
 	
 <!--action2  -->	
 <div id="action2ht" class = "action2htc">
-	<p style="text-align:left; font-size: 12px; color:grey; font-weight:bold; "> Filtrer par :</p>
+	<p style="text-align:left; font-size: 12px; color:black; font-weight:bold; "> Filtrer par :</p>
 	<b id = Filtre1 class = "Filtre1">PUBLIQUE</b>
 	<br />
 	<b id = Filtre2 class = "Filtre1">PRIVÉE</b>
@@ -99,7 +99,8 @@
 	<b id = Filtre4 class = "Filtre1">PROPRIÉTÉ DE TC ENERGY</b>
 	<p id = bbb >FERMER</p>
 	<b id = "coucheactive2" class = "coucheactive2a" >Couche de sélection active : </b>
-	<div id = "F2-1" ></div>
+	<div id = "F2-1" style="text-align:left;display: inline-block; padding: 4px;        font-size: 14px; color:black; font-weight:bold; "></div>
+	<p id = "aaa2" class = "aaa2classe" >ENLEVER LA COUCHE</p>
 	</div>
  
  <div id="sidebar">
@@ -152,6 +153,7 @@
    <div id = "box15" class = "box"></div>
    <br />
    <div id = "box16" ></div>
+   <br />
    <div id = "box17" ></div>
    
    
@@ -259,6 +261,12 @@
 	    subdomains: 'abcd',
 	    maxZoom: 19
         }).addTo(map);
+		
+	
+		
+		
+		
+		
 	
 		//HYDRO TILEMAP
 		map.createPane('labels');
@@ -322,6 +330,8 @@
 		var wmsLayer5 = L.tileLayer.wms('https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wms/Inventaire_Ecoforestier?', {
         layers: 'Inventaire_Ecoforestier'
         })
+		
+		
 		
 		 //TEST Wfs
 		var wmsLayer6 = L.tileLayer.wms('https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wfs/Inventaire_Ecoforestier?', {
@@ -759,7 +769,8 @@
         };
         }
         
-		function rr2() {	
+		function rr2() {
+         		bb2(); // ferme la fenêtre de l'action2		
 		   if (map.hasLayer(featureGroup)) {
         featureGroup.clearLayers();
 		map.removeLayer(featureGroup);
@@ -799,33 +810,65 @@
 
 
 		//ACTIONS2 DE LA SIDEBAR
-        
+        // cliquer sur filtre avancé de la sidebar
 		document.getElementById("box17").addEventListener('click', rr3);
 			
         function rr3() {	
 		//Ouvrir la fenêtre
 		document.getElementById("action2ht").className = "action2htc2";
+		bb1();
 		};
 		
 
         function bb2() {
 		//Ferme la fenêtre
         document.getElementById("action2ht").className = "action2htc";
+		rr5(); // fermer également la couche de sélection active
         };
 		document.getElementById("bbb").addEventListener("click", bb2);
         //fin
 		
-        document.getElementById("Filtre1").addEventListener('click', rr4);
-
-        function rr4() {	
-		//afficher la couche active
+		
+		//cliquer sur tenure publique
+		var tttt = "test";
+        document.getElementById("Filtre1").addEventListener('click', function() {
+  rr4("Publique")});
+		document.getElementById("Filtre2").addEventListener('click', function() {
+  rr4("Privée")});
+		document.getElementById("Filtre3").addEventListener('click',function() {
+  rr4("Municipale")});
+		document.getElementById("Filtre4").addEventListener('click', function() {
+  rr4("Propriété de TC Energy")});
+		
+        function rr4(valeur) {	
+		//afficher la couche active - tenure publique
 		document.getElementById("coucheactive2").className = "coucheactive2a2";
-		$('#F2-1').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>Tenure publique</b>");
+		document.getElementById("aaa2").className = "aaa2classenew"; 
+		$('#F2-1').html("<br />"+valeur);
 		};
 
+        //cliquer ENLEVER LA COUCHE - couche active
+        document.getElementById("aaa2").addEventListener('click', rr5);
 
-
-
+        function rr5() {	
+		//enlever la couche active et autre infos - remmettre les classe à cacher
+		document.getElementById("coucheactive2").className = "coucheactive2a";
+		document.getElementById("aaa2").className = "aaa2classe"; 
+		$('#F2-1').html("");
+		};
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 
 
