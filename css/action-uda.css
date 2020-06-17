@@ -33,17 +33,16 @@
     text-align: left;
     font-size: 11px;
     cursor: pointer;
-    color: grey;
+    color: black;
     font-weight: bold;
-    border: 1px solid #88b6c;
+    border: 1px solid grey;
     border-radius: .5em;
     margin-left: 5%;
-    padding: 3px;
+    padding: 2px;
 }
 
 #action1:hover {
   background-color: #F0F8FF;
-  border: 1px solid grey;
 }
 
 /*   Fin  action 1     */  
@@ -60,7 +59,7 @@
     border: 3px solid #8B0000;
     background-color: #8B0000;
     border-radius: .5em;
-    margin-left: 40%;
+    margin-left: 37%;
     padding: 3px;
 }
 #bbb:hover {
@@ -120,7 +119,7 @@
     cursor: pointer;
     color: grey;
     font-weight: bold;
-    border: 2px solid #F0F8FF;
+    border: 1px solid #F0F8FF;
     border-radius: .5em;
     margin-left: 5%;
     padding: 3px;
@@ -146,6 +145,27 @@
 }
 
 
+.aaa2classe {
+	display:none
+}
+
+.aaa2classenew {
+	display: inline-block;
+    text-align: left;
+    font-size: 11px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    border: 3px solid #8B0000;
+    background-color: #8B0000;
+    border-radius: .5em;
+    margin-left: 25%;
+    padding: 3px;
+}
+.aaa2classenew:hover {
+  background-color: grey;
+  border: 3px solid grey;
+}
 /*    fin fenêtre action2    */
 
 
