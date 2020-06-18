@@ -21,7 +21,7 @@
 	<script src="js/ControlLayer2/groupedlayercontrol.min.js"></script>
 	<script src="js/ControlLayer2/groupedlayercontrol.min.js.map"></script>
     <link rel="stylesheet" href="js/ControlLayer2/groupedlayercontrol.css" />
-	<link rel="stylesheet" href="js/ControlLayer2/groupedlayercontrol.min.css" />
+	<link rel="stylesheet" href="js/ControlLayer2/groupedlayercontrol.min.css" />     
 	
     <!-- Draw -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw-src.css" />
@@ -171,9 +171,10 @@
 
 
     <script>
-	
+		
         var map = L.map('map',{ zoomControl: false }).setView([46.389310, -72.631907],9);
 		
+
 
 		//AFFICHAGE DE LA BARRE D'INFORMATION
 	    function aa() {
@@ -260,7 +261,7 @@
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	    subdomains: 'abcd',
 	   maxZoom: 19
-        }).addTo(map);
+        });
 		
 	
 		
@@ -379,11 +380,11 @@
 	{
 		minZoom : 0,
 		maxZoom : 18,
-        attribution : "IGN-F/Geoportail",
-		tileSize : 256 ,// les tuiles du Géooportail font 256x256px,
+        attribution : "MFFP",
+		tileSize : 256 ,
 		opacity : 5
 	}
-) ;
+).addTo(map) ;
 		
 		
 		
@@ -392,18 +393,27 @@
 		
 		
 		//ESRI BASEMAP
-		var esribasemap = L.esri.basemapLayer('Imagery');
-        L.esri.basemapLayer('Imagery');
-		zIndex: 1
+		//var esribasemap = L.esri.basemapLayer('Imagery');
+        //L.esri.basemapLayer('Imagery');
+		//zIndex: 1,
+		//maxZoom: 19,
+		
+	    var esribasemap = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+		attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+
+	});
+		
+		
+		
 	
 
 		//LABEL CAD
-		var tile3 = L.tileLayer('tilelabel10/{z}/{x}/{y}.png', {
-        minZoom: 16,
-       maxZoom: 18,
-        tms: false,
-        pane: 'labels'
-        }).addTo(map);
+		//var tile3 = L.tileLayer('tilelabel10/{z}/{x}/{y}.png', {
+        //minZoom: 16,
+       //maxZoom: 18,
+        //tms: false,
+        //pane: 'labels'
+        //}).addTo(map);
 		
 		
 		// TEST VECTORTILES
@@ -946,7 +956,7 @@
 			style: function(feature) {
 				return {
 				fillColor: '#FFA500',
-				color: '#4B0082',
+				color: '#FF00FF',
 				weight: 1.2,
 				fillOpacity: 0.1
 				};
@@ -1001,7 +1011,11 @@
 	
 	// LISTES DES COUCHES
 	var baseLayers = {
-	"CartoDB": CartoDB_Positron
+	"Gouv. Québec" : wmsLayer11,
+	"CartoDB": CartoDB_Positron,
+	"Esri basemap (Tile)" :esribasemap,
+	"Orthophotos MFFP (WMTS)" : wmsLayer5,
+	"Relief ombré (WMS)" : wmsLayer1
   };
 	
 	var groupedOverlays = {
@@ -1012,13 +1026,7 @@
 	"Hydrographie (VT)" : vectorGrid
 	
   },
-  "<b style='font-size: 12px; border: 1px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>FONDS DE CARTE</b>": {
-  	"Esri basemap (Tile)" :esribasemap,
-	"Relief ombré (WMS)" : wmsLayer1,
-	"Orthophotos MFFP (WMTS)" : wmsLayer5,
-	"Gouv. Québec" : wmsLayer11
-	
-  },
+  
   "<b style='font-size: 12px; border: 2px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>THÉMATIQUE</b>": {
     "Adresse (WMS)" : wmsLayer7,
     "Adresse Québec(WMS)" : AQ,
@@ -1032,7 +1040,7 @@
 	"Aire protégées-registre (WMS)" : wmsLayer9,
 	"Zones inondables-BDZI(WMS)" : wmsLayer10
 	
-  },
+ },
   "<b style='font-size: 12px; border: 1px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>AUTRES</b>": {
 	"Couche éditable" : drawnItems
   },
@@ -1048,19 +1056,9 @@
 
 // Use the custom grouped layer control, not "L.control.layers"
 L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
 	
 	
 	
