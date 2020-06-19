@@ -153,8 +153,10 @@
    <div id = "box15" class = "box"></div>
    <br />
    <div id = "box16" ></div>
-   <br />
+   
    <div id = "box17" ></div>
+   
+   <div id = "box18" ></div>
    
    
  
@@ -781,8 +783,9 @@
 			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block;border-radius: .125em; background-color: #078BAB;   color: white;'> Historique</b><div class='line'></div>");
 			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Historique des contacts... </b>");
 			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB; border-radius: .125em;  color: white;'> Actions</b><div class='line'></div>");
-			$('#box16').html("<b id='action1'  >Afficher les lots appartenant à ce propriétaire</b>");
-            $('#box17').html("<b id='action1'  >Filtre avancée</b>");
+			$('#box16').html("<b id='action1'  >• Afficher les lots appartenant à ce propriétaire</b>");
+            $('#box17').html("<b id='action1'  >• Filtre avancée</b>");
+			$('#box18').html("<b id='action1'  >• Sélectionner des polygones</b>");
 			});
 			}
 			
@@ -1186,8 +1189,9 @@ L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
 			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em;background-color: #078BAB;  color: white;'> Historique</b><div class='line'></div>");
 			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Historique des contacts... </b>");
 			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;border-radius: .125em;   color: white;'> Actions</b><div class='line'></div>");
-			$('#box16').html("<b id='action1'  >Afficher les lots appartenant à ce propriétaire</b>");
-            $('#box17').html("<b id='action1'  >Filtre avancée</b>");
+			$('#box16').html("<b id='action1'  >• Afficher les lots appartenant à ce propriétaire</b>");
+            $('#box17').html("<b id='action1'  >• Filtre avancée</b>");
+			$('#box18').html("<b id='action1'  >• Sélectionner des polygones</b>");
 		e.layer.setStyle({'color': 'red',weight: 3});
 		selected = e.layer;
 		if(e.layer._popup)
@@ -1227,6 +1231,7 @@ L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
 	   $('#box15').html("");
 	   $('#box16').html("");
 	   $('#box17').html("");
+	   $('#box18').html("");
        };	
 	
 	    // Enlever la sélection

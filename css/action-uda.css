@@ -35,14 +35,13 @@
     cursor: pointer;
     color: black;
     font-weight: bold;
-    border: 1px solid grey;
     border-radius: .5em;
     margin-left: 5%;
-    padding: 2px;
+    padding: 3px;
 }
 
 #action1:hover {
-  background-color: #F0F8FF;
+  background-color: yellow;
 }
 
 /*   Fin  action 1     */  
