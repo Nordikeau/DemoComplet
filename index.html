@@ -75,8 +75,10 @@
 	</div>
 <!--action1  -->	
 <div id="action1ht" class = "action1htc">
+    <div>
 	<b id = "coucheactive" >Couche de sélection active : </b>
-	<br />
+	<b id = "zoom" >zoom</b>
+	</div>
 	<br />
 	<div id = "proprioactif" style="text-align:left;display: inline-block; padding: 4px;     background-color: #f4f4f4;   font-size: 14px; color:black; font-weight:bold; " ></div>
 	<br />
@@ -89,7 +91,7 @@
 	
 <!--action2  -->	
 <div id="action2ht" class = "action2htc">
-	<p style="text-align:left; font-size: 12px; color:black; font-weight:bold; "> Filtrer par :</p>
+	<p style="text-align:left; font-size: 13px; color:black; font-weight:bold; text-decoration: underline; "> Filtrer par tenure :</p>
 	<b id = Filtre1 class = "Filtre1">PUBLIQUE</b>
 	<br />
 	<b id = Filtre2 class = "Filtre1">PRIVÉE</b>
@@ -97,6 +99,15 @@
 	<b id = Filtre3 class = "Filtre1" >MUNICIPALE</b>
 	<br />
 	<b id = Filtre4 class = "Filtre1">PROPRIÉTÉ DE TC ENERGY</b>
+	<br />
+	<p style="text-align:left; font-size: 13px; color:black; font-weight:bold;text-decoration: underline; "> Filtrer par propriétaire :</p>
+	<FORM>
+    <SELECT name="nom" size="1">
+	<OPTION>
+    <OPTION>9077-5529 QUÉBEC INC.
+    <OPTION>2957 2989 QUÉBEC INC.
+    </SELECT>
+    </FORM>
 	<p id = bbb >FERMER</p>
 	<b id = "coucheactive2" class = "coucheactive2a" >Couche de sélection active : </b>
 	<div id = "F2-1" style="text-align:left;display: inline-block; padding: 4px;        font-size: 14px; color:black; font-weight:bold; "></div>
@@ -184,10 +195,18 @@
         };
 		document.getElementById("logo").addEventListener("click", aa);
 		
+		
 		function bb() {
         document.getElementById("test-in").className = "test-test-debut";
         };
 		document.getElementById("close").addEventListener("click", bb);
+		
+		
+		function reload() {
+        location.reload(true);
+        };
+		document.getElementById("logoprint").addEventListener("click", reload);
+		
 		
 		//PANES
 		map.createPane("pane450").style.zIndex = 450;
@@ -810,7 +829,7 @@
             },
 		onEachFeature: function(feature, layer) {
 		listeLots.push(feature.properties.NO_LOT);
-		}
+			}
 			})
 			return cadproprio;
 			}
@@ -845,6 +864,10 @@
 				//Ouvrir la fenêtre
 				document.getElementById("action1ht").className = "action1htc2";
 				featureGroup.bringToBack();
+				//Click sur le bouton zoom pour zoomer sur la couche des propriétaire
+				document.getElementById("zoom").addEventListener('click', function(){
+		        map.fitBounds(featureGroup.getBounds())
+		});
           
 		};
         
