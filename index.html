@@ -3,6 +3,9 @@
 <head>
     <title>Demo - Laurent Savard</title>
 	<meta charset="utf-8" />
+	<meta http-equiv='cache-control' content='no-cache'> 
+    <meta http-equiv='expires' content='0'> 
+    <meta http-equiv='pragma' content='no-cache'> 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -12,7 +15,7 @@
 	<link rel="stylesheet" href="css/leaflet-search.css" />
     <script src="js/leaflet-search.js"></script>
 	<script src="data/pointeau.js"></script>
-	<script src="data/cad20200622_v1.js"></script>
+	<script src="data/cad.js"></script>
 	<script src="data/BV_Assomption2.js"></script>
 	
 	
@@ -203,7 +206,7 @@
 		
 		
 		function reload() {
-        location.reload(true);
+        window.location.reload(true);
         };
 		document.getElementById("logoprint").addEventListener("click", reload);
 		
