@@ -10,6 +10,21 @@
     border-radius: .2em;
 }
 
+#zoom {
+    font-size: 11px;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    border: 1px solid grey;
+    border-radius: .5em;
+    margin-left: 195px;
+    padding: 3px;
+}
+
+#zoom:hover {
+ background-color: #F0F8FF;
+}
+
 #aaa {
 	display: inline-block;
     text-align: left;
@@ -116,16 +131,18 @@
     text-align: left;
     font-size: 11px;
     cursor: pointer;
+    background-color: #eee;
     color: grey;
     font-weight: bold;
-    border: 1px solid #F0F8FF;
+    border: 1px solid #ccc;
     border-radius: .5em;
     margin-left: 5%;
-    padding: 3px;
+    padding: 2px;
 }
 .Filtre1:hover {
-  background-color: #F0F8FF;
+  background-color: grey;
   border: 1px solid grey;
+  color: white;
 }
 
 .coucheactive2a {
