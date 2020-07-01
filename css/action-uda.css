@@ -81,6 +81,10 @@
   border: 3px solid grey;
 }
 
+#ListProprio { 
+       width:200px;
+        } 
+
 
 
 
@@ -120,7 +124,7 @@
     right: 0;
     margin: 10px;
     min-height: 50px;
-    width: 250px;
+    width: 350px;
     left: 20%;
     border-radius: .4em;
     box-shadow: 0 0 10px #999;
@@ -158,6 +162,7 @@
     border: 4px solid #b3b3ff;
     background-color: #b3b3ff;
     border-radius: .2em;
+	    padding: 1px;
 }
 
 

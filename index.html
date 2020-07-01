@@ -3,13 +3,14 @@
 <head>
     <title>Demo - Laurent Savard</title>
 	<meta charset="utf-8" />
-	<meta http-equiv='cache-control' content='no-cache'> 
-    <meta http-equiv='expires' content='0'> 
-    <meta http-equiv='pragma' content='no-cache'> 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet.js"></script>
+	
+	<!-- Load Esri Leaflet from CDN -->
+  <script src="https://unpkg.com/esri-leaflet@2.4.1/dist/esri-leaflet.js"
+  integrity="sha512-xY2smLIHKirD03vHKDJ2u4pqeHA7OQZZ27EjtqmuhDguxiUvdsOuXMwkg16PQrm9cgTmXtoxA6kwr8KBy3cdcw=="
+  crossorigin=""></script>
 	
 	<!-- search stephano -->
 	<link rel="stylesheet" href="css/leaflet-search.css" />
@@ -41,7 +42,7 @@
 	<!-- VectorGrid -->
 	<script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
 	<script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.js"></script>
-	<script src="data/hydro2020.js"></script>
+	<script src="data/hydro2020_light.js"></script>
 	
 
 	
@@ -60,16 +61,46 @@
 	
 	<!-- Style des actions de la sidebar  -->
 	<link rel="stylesheet" href="css/action-uda.css"/>
-	
+
+   
 	
     <style>
-	
+#loader { 
+            border: 12px solid #f3f3f3; 
+            border-radius: 50%; 
+            border-top: 12px solid #444444; 
+            width: 70px; 
+            height: 70px; 
+            animation: spin 1s linear infinite; 
+        } 
+          
+        @keyframes spin { 
+            100% { 
+                transform: rotate(360deg); 
+            } 
+        } 
+          
+        .center { 
+            position: absolute; 
+            top: 0; 
+            bottom: 0; 
+            left: 13%; 
+            right: 0; 
+            margin: auto; 
+        } 
+		
+		
+
 	</style>	
 	
 
 
 </head>
+
 <body>
+<!--gif de loading  -->
+<div id="loader" class="center"></div> 
+
 <div id="test-in" class = "test-test-debut">
     <img src="icone/delete-button.svg" alt="HTML5" id="close"  width="25" height="25">
 	<br />
@@ -104,15 +135,10 @@
 	<b id = Filtre4 class = "Filtre1">PROPRIÉTÉ DE TC ENERGY</b>
 	<br />
 	<p style="text-align:left; font-size: 13px; color:black; font-weight:bold;text-decoration: underline; "> Filtrer par propriétaire :</p>
-	<FORM>
-    <SELECT name="nom" size="1">
-	<OPTION>
-    <OPTION>9077-5529 QUÉBEC INC.
-    <OPTION>2957 2989 QUÉBEC INC.
-    </SELECT>
-    </FORM>
+    <select id = "ListProprio">
+	</select>
 	<p id = bbb >FERMER</p>
-	<b id = "coucheactive2" class = "coucheactive2a" >Couche de sélection active : </b>
+	<p id = "coucheactive2" class = "coucheactive2a" >Couche de sélection active : </p>
 	<div id = "F2-1" style="text-align:left;display: inline-block; padding: 4px;        font-size: 14px; color:black; font-weight:bold; "></div>
 	<p id = "aaa2" class = "aaa2classe" >ENLEVER LA COUCHE</p>
 	</div>
@@ -187,8 +213,28 @@
 
 
     <script>
+	
+	    //AFFICHAGE DU GIF DE LOADING
+		document.onreadystatechange = function() { 
+            if (document.readyState !== "complete") { 
+                document.querySelector( 
+                  "body").style.visibility = "hidden"; 
+                document.querySelector( 
+                  "#loader").style.visibility = "visible"; 
+            } else { 
+                document.querySelector( 
+                  "#loader").style.display = "none"; 
+                document.querySelector( 
+                  "body").style.visibility = "visible"; 
+            } 
+        }; 
+		
+		
 		
         var map = L.map('map',{ zoomControl: false }).setView([46.389310, -72.631907],9);
+		
+		
+
 		
 
 
@@ -288,8 +334,7 @@
         });
 		
 	
-		
-		
+	
 		
 		
 	
@@ -430,7 +475,13 @@
 	//}
 //) ;
 		
-		
+	var CartoDB_PositronOnlyLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+	subdomains: 'abcd',
+	maxZoom: 19
+});
+
+
 		
 		
 		//ESRI BASEMAP
@@ -676,10 +727,13 @@
 	   featureLayer.bindPopup(feature.properties.type);
        }
        })
-	
        });
 	   
 	   
+	   
+
+		
+
 	   
 	   
 	   
@@ -777,24 +831,17 @@
 			
 			// div invisible - valeur de proprietaire //
 			$('#proprio').html(marker.feature.properties.NM_PROPR);
-
+			
 			$('#box1').html(marker.feature.properties.NO_LOT);
 			$('#box2').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>Propriétaire : </b>"+marker.feature.properties.NM_PROPR);
-			
 			$('#box2a').html("<b  style='color: grey; font-weight: 100; font-size : 12px'>Contact : </b>"+marker.feature.properties.Contact);
 			$('#box2b').html("<b  style='color: grey; font-weight: 100; font-size : 12px'>Adresse : </b>"+marker.feature.properties.Adresse1);
 			$('#box2c').html(marker.feature.properties.Adresse2);
 			$('#box2d').html("<b  style='color: grey;font-weight: 100;  font-size : 12px'>No. de téléphone : </b>"+marker.feature.properties.Tel);
-
-			
-			
 			$('#box3').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Circonscription foncière : </b>"+marker.feature.properties.NM_CIRCN_F);
 			$('#box3a').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Ancien lot : </b>"+marker.feature.properties.Ancienlot);
 			$('#box3b').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Titre : </b>"+marker.feature.properties.Titre);
-			
 			$('#box5').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em; background-color: #078BAB;    color: white;'> Cadre administratif</b><div class='line'></div>");
-			
-			
 			$('#box6').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>Région administrative : </b>"+marker.feature.properties.RegAdm);
 			$('#box7').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>MRC : </b>"+marker.feature.properties.MRC);
 			$('#box8').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Municipalité : </b>"+marker.feature.properties.Mun);
@@ -810,6 +857,53 @@
 			$('#box18').html("<b id='action1'  >• Sélectionner des polygones</b>");
 			});
 			}
+			
+			// LISTE DE PROPRIÉTAIRE
+			
+			
+			
+			function bonbon(){
+		console.log("hey");
+		listeProprio111 = []; 
+		var data = cadd;
+	    var cadproprio = new L.GeoJSON(data, {
+		onEachFeature: function(feature, layer) {
+		listeProprio111.push(feature.properties.NM_PROPR);
+			}
+			})
+			return listeProprio111;
+			}
+			
+			
+			function removeDuplicates(array) {
+  return array.filter((a, b) => array.indexOf(a) === b)
+};
+			
+        var ww = bonbon();
+	    var html = [];
+        var www = 	removeDuplicates(ww);
+        www.sort();		
+
+
+
+		
+	    for (var i = 0; i < www.length; i++) {//begin for loop
+
+        //add the option elements to the html array
+        html.push("<option>" + www[i] + "</option>")
+
+        }//end for loop
+
+        //add the option values to the select list with an id of sex
+        document.getElementById("ListProprio").innerHTML = html.join("");
+			
+			
+			
+			
+			
+			
+			
+			
 			
 		////////////////////////////////////ACTIONS1 DE LA SIDEBAR/////////////////////////////////////////////////
 		var action1;
@@ -1118,7 +1212,7 @@
 	var groupedOverlays = {
   "<b style = ' font-size: 12px; border: 1px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>COUCHES</b>" : {
 	"Cadastre (Recherche)": featuresLayer,
-	"Point d'eau" : pteau1,
+	"Point d'eau <img src='images/marker-icon.png' id=close height=18> " : pteau1,
 	"Bassin versant de l'Assomption" : bv1,
 	"Hydrographie (VT)" : vectorGrid
 	
@@ -1127,7 +1221,7 @@
   "<b style='font-size: 12px; border: 2px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>THÉMATIQUE</b>": {
     "Adresse (WMS)" : wmsLayer7,
     "Adresse Québec(WMS)" : AQ,
-    "Hydrographie" : tile2,
+    "Hydrographie (Tile)" : tile2,
 	"Carte écoforestière (WMS)" : wmsLayer2,
 	"Zone agricole (WMS)" : wmsLayer3,
 	"Decisions (WMS)" : wmsLayer3a,
@@ -1135,13 +1229,22 @@
 	"Milieux humides CIC (WMS)" : wmsLayer4,
 	"Aire protégées (WMS)" : wmsLayer8,
 	"Aire protégées-registre (WMS)" : wmsLayer9,
-	"Zones inondables-BDZI(WMS)" : wmsLayer10
-	
+	"Zones inondables-BDZI(WMS)" : wmsLayer10,
+	"Label" : CartoDB_PositronOnlyLabels
  },
   "<b style='font-size: 12px; border: 1px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>AUTRES</b>": {
 	"Couche éditable" : drawnItems
   },
 };
+	
+	
+	 
+	
+	
+	
+	
+	
+	
 	
 	var options = {
   // Make the "Base Maps" group exclusive (use radio inputs)
@@ -1171,7 +1274,7 @@ L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
 
 
 	   map.addLayer(featuresLayer);
-
+// Recherche de LOT
 	   var searchControl = new L.Control.Search({
 	    container: 'findbox',
 		layer: featuresLayer,
@@ -1265,15 +1368,40 @@ L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
 	   map.on('click', resetinfo);
 	   // ajouter moseover
 	
-	
-	
-	
+
 	    map.addControl( searchControl );  //inizialize search control
 	   
 
 	   
 	   
-       
+	   //////////////////// test /////////////////////
+	   
+	    var searchControl2 = new L.Control.Search({
+	    container: 'findbox2',
+		layer: featuresLayer,
+		propertyName: 'NM_PROPR',
+		marker: false,
+		moveToLocation: function(latlng, title, map) {
+			//map.fitBounds( latlng.layer.getBounds() );
+			var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+  			map.setView(latlng, zoom); // access the zoom
+		}
+	    });
+
+	    searchControl.on('search:locationfound', function(e) {
+		e.layer.setStyle({'color': 'red',weight: 3});
+		selected = e.layer;
+		if(e.layer._popup)
+			e.layer.openPopup();
+
+	   }).on('search:collapsed', function(e) {
+        selected = e.layer;
+		featuresLayer.eachLayer(function(layer) {	//restore feature color
+			featuresLayer.resetStyle(layer);
+		});	
+	    });
+	   
+        map.addControl( searchControl2 );  //inizialize search control
 	   
 	   
 	   
