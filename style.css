@@ -74,13 +74,24 @@
     border-radius: .3em;
     margin-top: 10px;
     padding: 2px 0;
-    width: 160px;;
+    width: 160px;
     height: 26px;
 	margin-left: 25%;
 	border: 1.5px solid grey;
 }
 
+#findbox2 {
+	background: white;
+    border-radius: .3em;
+    margin-top: 10px;
+    padding: 2px 0;
+    width: 330px;
+    height: 26px;
+	border: 1.5px solid grey;
+}
+
 /*  FIN  SIDEBAR      */
+
 
 
 
@@ -219,6 +230,7 @@
 }
 
 
+
 /*    Boite de recherche de texte dans la sidebar      */
 .search-tooltip {
 	width: 200px;
@@ -228,10 +240,6 @@
 	float: left;
 	margin-left: -22px;
 }
-
-
-
-
 
 
 

@@ -89,8 +89,8 @@
             margin: auto; 
         } 
 		
-		
 
+		
 	</style>	
 	
 
@@ -135,8 +135,11 @@
 	<b id = Filtre4 class = "Filtre1">PROPRIÉTÉ DE TC ENERGY</b>
 	<br />
 	<p style="text-align:left; font-size: 13px; color:black; font-weight:bold;text-decoration: underline; "> Filtrer par propriétaire :</p>
-    <select id = "ListProprio">
+    <select id = "ListProprio"  >
+	<option value="">(Sélectionner...)</option>
 	</select>
+	<br />
+	<div id = "SelectProprio" style= "font-size: 8px; color:grey; padding: 8px;"></div>
 	<p id = bbb >FERMER</p>
 	<p id = "coucheactive2" class = "coucheactive2a" >Couche de sélection active : </p>
 	<div id = "F2-1" style="text-align:left;display: inline-block; padding: 4px;        font-size: 14px; color:black; font-weight:bold; "></div>
@@ -559,7 +562,7 @@
 				//fill: true,
 				color: 'red',
 				//opacity: 1,
-				weight: 2,
+				weight: 4,
 			};
 
 			vectorGrid.setFeatureStyle(properties.OBJECTID, style);
@@ -858,47 +861,7 @@
 			});
 			}
 			
-			// LISTE DE PROPRIÉTAIRE
-			
-			
-			
-			function bonbon(){
-		console.log("hey");
-		listeProprio111 = []; 
-		var data = cadd;
-	    var cadproprio = new L.GeoJSON(data, {
-		onEachFeature: function(feature, layer) {
-		listeProprio111.push(feature.properties.NM_PROPR);
-			}
-			})
-			return listeProprio111;
-			}
-			
-			
-			function removeDuplicates(array) {
-  return array.filter((a, b) => array.indexOf(a) === b)
-};
-			
-        var ww = bonbon();
-	    var html = [];
-        var www = 	removeDuplicates(ww);
-        www.sort();		
 
-
-
-		
-	    for (var i = 0; i < www.length; i++) {//begin for loop
-
-        //add the option elements to the html array
-        html.push("<option>" + www[i] + "</option>")
-
-        }//end for loop
-
-        //add the option values to the select list with an id of sex
-        document.getElementById("ListProprio").innerHTML = html.join("");
-			
-			
-			
 			
 			
 			
@@ -1003,10 +966,15 @@
 		//Ferme la fenêtre
         document.getElementById("action2ht").className = "action2htc";
 		rr5(); // fermer également la couche de sélection active
-		// Enlever la couche de sélection
+		// Enlever la couche de sélection du filtre de tenure
 		if (map.hasLayer(featureGroupF)) {
         featureGroupF.clearLayers();
 		map.removeLayer(featureGroupF);
+		}
+		// Enlever la couche de sélection du filtre de proprio
+		if (map.hasLayer(featureGroupP)) {
+        featureGroupP.clearLayers();
+		map.removeLayer(featureGroupP);
 		}
         };
 		
@@ -1088,7 +1056,73 @@
 		
 		
 		
+					// LISTE DE PROPRIÉTAIRE
+			function bonbon(){
+		console.log("hey");
+		listeProprio111 = []; 
+		var data = cadd;
+	    var cadproprio = new L.GeoJSON(data, {
+		onEachFeature: function(feature, layer) {
+		listeProprio111.push(feature.properties.NM_PROPR);
+			}
+			})
+			return listeProprio111;
+			}
+			
+			
+			function removeDuplicates(array) {
+            return array.filter((a, b) => array.indexOf(a) === b)
+            };
+			
+           var ww = bonbon();
+	       var html = [];
+           var www = 	removeDuplicates(ww);
+           www.sort();		
+
+	    for (var i = 0; i < www.length; i++) {//begin for loop
+
+        //add the option elements to the html array
+        html.push("<option>" + www[i] + "</option>")
+
+        }//end for loop
+
+        //add the option values to the select list with an id of 
+        document.getElementById("ListProprio").innerHTML = html.join("");
 		
+		
+		
+		// Quand la valeur de proprio est sélectionner	
+		function createproprio(){
+		// prendre la valeur de propriétaire
+		bb = document.getElementById("SelectProprio");
+		action1 = bb.textContent;
+		listeLots = []; 
+		var data = cadd;
+	    var cadproprio = new L.GeoJSON(data, {
+		style: style3,
+		filter: function(feature, layer) {
+        return feature.properties.NM_PROPR == action1;
+            },
+		onEachFeature: function(feature, layer) {
+		listeLots.push(feature.properties.NO_LOT);
+			}
+			})
+			return cadproprio;
+			}
+			
+		var featureGroupP = L.featureGroup();	
+        // Quand la valeur de proprio est sélectionner		
+		$(document).on('change','#ListProprio', function(e) {
+		featureGroupP.clearLayers();
+		var newProprio = e.target.value;
+		$('#SelectProprio').html(e.target.value);
+		var layer = createproprio();
+		featureGroupP.addLayer(layer);
+		featureGroupP.addTo(map);
+		map.fitBounds(featureGroupP.getBounds());
+		featureGroupP.bringToBack();
+		});
+			
 		
 		
 		
