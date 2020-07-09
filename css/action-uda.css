@@ -36,7 +36,7 @@
     background-color: #8B0000;
     border-radius: .5em;
     margin-left: 140px;
-    padding: 3px;
+    padding: 1px;
 }
 #aaa:hover {
   background-color: grey;
@@ -73,18 +73,43 @@
     border: 3px solid #8B0000;
     background-color: #8B0000;
     border-radius: .5em;
-    margin-left: 37%;
-    padding: 3px;
+    margin-left: 53%;
+    padding: 1px;
 }
 #bbb:hover {
   background-color: grey;
   border: 3px solid grey;
 }
 
+#Appliquer {
+	display: inline-block;
+    text-align: left;
+    font-size: 11px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    border: 3px solid #1bb56b;
+    background-color: #1bb56b;
+    border-radius: .5em;
+    padding: 1px;
+	margin-left:5px;
+}
+#Appliquer:hover {
+  background-color: grey;
+  border: 3px solid grey;
+}
+
+/*    fenêtre action2 - Liste déroulante des propritaires */
 #ListProprio { 
        width:340px;
 	   border-radius: .3em;
+	   box-shadow: 0 0 3px grey;
+	   cursor: pointer;
         } 
+		
+#ListProprio:hover{ 
+    box-shadow: 0 0 4px #6495ED
+} 
 
 
 
@@ -156,16 +181,14 @@
 .coucheactive2a2 {
     display: inline-block;
     text-align: left;
-    font-size: 11px;
+    font-size: 12px;
     color: black;
     font-weight: bold;
-    border: 4px solid #b3b3ff;
     background-color: #b3b3ff;
-    border-radius: .2em;
-	    padding: 1px;
+    border-radius: .5em;
+	    padding: 3px;
 }
-
-
+ 
 .aaa2classe {
 	display:none
 }
@@ -180,13 +203,34 @@
     border: 3px solid #8B0000;
     background-color: #8B0000;
     border-radius: .5em;
-    margin-left: 25%;
-    padding: 3px;
+    margin-left: 32%;
+    padding: 1px;
 }
 .aaa2classenew:hover {
   background-color: grey;
   border: 3px solid grey;
 }
+
+/*    valeur de proprietaire    */
+.SelectProprioC {
+	display: inline-block;
+  font-size: 12px;
+  color:grey;
+  padding: 3px;
+}
+
+.SelectProprioCNew {
+  background-color: #1bb56b6b;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px;
+    border-radius: .5em;
+}
+
+
+
+
 /*    fin fenêtre action2    */
 
 

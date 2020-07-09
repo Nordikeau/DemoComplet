@@ -101,13 +101,23 @@
 <!--gif de loading  -->
 <div id="loader" class="center"></div> 
 
+<!--Fenêtre d'information  --> 
 <div id="test-in" class = "test-test-debut">
     <img src="icone/delete-button.svg" alt="HTML5" id="close"  width="25" height="25">
 	<br />
 	<p style="text-align:left; font-size: 12px; color:grey; font-weight:bold; "> Ceci est un exemple pour ajouter de l'information...</p>
 	<p style="text-align:left; font-size: 12px; color:grey; font-weight:bold; "> Version BETA, Laurent Savard 2020.</p>
 	</div>
-<!--action1  -->	
+	
+<!--Fenêtre de téléchargement  -->	
+<div id="telechargement" class = "telechargementC">
+    <img src="icone/delete-button.svg" alt="HTML5" id="closetele"  width="25" height="25">
+	<br />
+	<p id = importshp >IMPORTER UN SHAPEFILE</p>
+	<p id = importkmz >IMPORTER UN KMZ</p>
+	</div>	
+	
+<!--ACTION1 - lots du même proprio -->	
 <div id="action1ht" class = "action1htc">
     <div>
 	<b id = "coucheactive" >Couche de sélection active : </b>
@@ -120,12 +130,15 @@
 	<div id = "p1" class = "box"></div>
 	<br />
 	<div id = "p2" class = "box"></div>
-	<p id = aaa >ENLEVER LA COUCHE</p>
+	<p id = aaa >Enlever la couche</p>
 	</div>
 	
-<!--action2  -->	
+<!--ACTION2 - Filtre avancé  -->	
 <div id="action2ht" class = "action2htc">
-	<p style="text-align:left; font-size: 13px; color:black; font-weight:bold; text-decoration: underline; "> Filtrer par tenure :</p>
+    <div>
+	<b style="text-align:left; font-size: 13px; color:#666; font-weight:bold; "> Filtrer par tenure :</b>
+	<b id = bbb >Fermer</b>
+	</div>
 	<b id = Filtre1 class = "Filtre1">PUBLIQUE</b>
 	<br />
 	<b id = Filtre2 class = "Filtre1">PRIVÉE</b>
@@ -134,20 +147,22 @@
 	<br />
 	<b id = Filtre4 class = "Filtre1">PROPRIÉTÉ DE TC ENERGY</b>
 	<br />
-	<p style="text-align:left; font-size: 13px; color:black; font-weight:bold;text-decoration: underline; "> Filtrer par propriétaire :</p>
+	<p id = "coucheactive2" class = "coucheactive2a"></p>
+	<p id = "aaa2" class = "aaa2classe" >Enlever la couche</p>
+
+	<p style="text-align:left; font-size: 13px; color:#666; font-weight:bold; "> Filtrer par propriétaire :</p>
     <select id = "ListProprio"  >
-	<option value="">(Sélectionner...)</option>
+	<option value="(Sélectionner...)"selected>(Sélectionner...)</option>
 	</select>
 	<br />
-	<div id = "SelectProprio" style= "font-size: 8px; color:grey; padding: 8px;"></div>
-	<p id = bbb >FERMER</p>
-	<p id = "coucheactive2" class = "coucheactive2a" >Couche de sélection active : </p>
-	<div id = "F2-1" style="text-align:left;display: inline-block; padding: 4px;        font-size: 14px; color:black; font-weight:bold; "></div>
-	<p id = "aaa2" class = "aaa2classe" >ENLEVER LA COUCHE</p>
+	<div id = "SelectProprio" class = "SelectProprioC" ></div>
+	<p id = Appliquer >Appliquer</p>
 	</div>
- 
+	
+<!--Sidebar  --> 
  <div id="sidebar">
    <div id="head2">
+    <img src="icone/down-arrow.svg" alt="HTML5" id="logoImport"   width="35" height="35">
     <img src="icone/question-mark-inside-a-circle.svg" alt="HTML5" id="logo"   width="35" height="35">
 	<img src="icone/uda_logo.png" alt="HTML5" class="logouda"  width="50" height="50">
 	<img src="icone/printer.svg" alt="HTML5" id="logoprint"  width="35" height="35"></div>
@@ -159,8 +174,12 @@
    
    <div id="findbox"></div>
    <br />
-   <div id = "box1" class = "box11"></div>
+   <div id = "box17" > <b id='action1'  >• Filtre avancée</b> </div>
+   <div id = "box18" > <b id='action1'  >• Sélectionner des polygones</b> </div>
+   <div id = "box16" ></div>
    <div class="line0"></div>
+   <br />
+   <div id = "box1" class = "box11"></div>
    <br />
    <div id = "box2" class = "box"></div>
    <br />
@@ -192,14 +211,6 @@
    <div id = "box13" class = "box"></div>
    <br />
    <div id = "box14" class = "box"></div>
-   <br />
-   <div id = "box15" class = "box"></div>
-   <br />
-   <div id = "box16" ></div>
-   
-   <div id = "box17" ></div>
-   
-   <div id = "box18" ></div>
    
    
  
@@ -238,26 +249,44 @@
 		
 		
 
-		
-
-
 		//AFFICHAGE DE LA BARRE D'INFORMATION
 	    function aa() {
         document.getElementById("test-in").className = "test-test";
+		//Fermer la fenêtre de téléchargement
+		 document.getElementById("telechargement").className = "telechargementC";
         };
 		document.getElementById("logo").addEventListener("click", aa);
-		
 		
 		function bb() {
         document.getElementById("test-in").className = "test-test-debut";
         };
 		document.getElementById("close").addEventListener("click", bb);
 		
+		//AFFICHAGE DE LA FENÊTRE DE TÉLÉCHARGEMENT
+	    function opentele() {
+        document.getElementById("telechargement").className = "telechargementCNew";
+		//Fermer la fenêtre d'information
+		document.getElementById("test-in").className = "test-test-debut";
+        };
+		document.getElementById("logoImport").addEventListener("click", opentele);
 		
+		function closetele() {
+        document.getElementById("telechargement").className = "telechargementC";
+        };
+		document.getElementById("closetele").addEventListener("click", closetele);
+		
+        //FONCTION RELOAD
 		function reload() {
         window.location.reload(true);
         };
 		document.getElementById("logoprint").addEventListener("click", reload);
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		//PANES
@@ -299,8 +328,6 @@
 		
 		drawnItems.bindPopup("ex : 456 m");
 		
-		
-		
 		 
 		 
 		 //SEARCH BAR
@@ -313,6 +340,9 @@
         results.addLayer(L.marker(data.results[i].latlng));
         }
         });
+		 
+		 
+		 
 		 
 		//MAP TILER BASEMAP Key non fonctionnelle
 		
@@ -336,11 +366,6 @@
 	   maxZoom: 19
         });
 		
-	
-	
-		
-		
-	
 		//HYDRO TILEMAP
 		map.createPane('labels');
         map.getPane('labels').style.zIndex = 650;
@@ -477,6 +502,17 @@
 //opacity : 5
 	//}
 //) ;
+
+
+     var wmsLayer13 = L.tileLayer.wms('https://serviceswebcarto.mern.gouv.qc.ca/arcgis/services/Territoire/TRQ_WMS/MapServer/WMSServer', {
+        layers: 'Pourvoirie à droits exclusifs',
+        transparent: true,
+        format: 'image/png',
+		opacity: 0.7
+        })
+
+
+	
 		
 	var CartoDB_PositronOnlyLabels = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png', {
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
@@ -854,10 +890,7 @@
 			$('#box12').html("<a href='data/pdf/test.pdf' target='_blank'>Documents administratifs (pdf)</a>");
 			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block;border-radius: .125em; background-color: #078BAB;   color: white;'> Historique</b><div class='line'></div>");
 			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Historique des contacts... </b>");
-			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB; border-radius: .125em;  color: white;'> Actions</b><div class='line'></div>");
 			$('#box16').html("<b id='action1'  >• Afficher les lots appartenant à ce propriétaire</b>");
-            $('#box17').html("<b id='action1'  >• Filtre avancée</b>");
-			$('#box18').html("<b id='action1'  >• Sélectionner des polygones</b>");
 			});
 			}
 			
@@ -958,11 +991,32 @@
         function rr3() {	
 		//Ouvrir la fenêtre
 		document.getElementById("action2ht").className = "action2htc2";
+		// Initialisation de la liste des proprietaire
+		$('#SelectProprio').html("");
+		var ww = bonbon();
+	       var html = [];
+           var www = 	removeDuplicates(ww);
+           www.sort();	 
+		// Ajouter valeur de défaut dans la liste déroulante 
+        html.push("<option>" + "Sélectionner un propriétaire..." + "</option>")
+	    for (var i = 0; i < www.length; i++) {//begin for loop
+        //add the option elements to the html array
+        html.push("<option>" + www[i] + "</option>")
+        }//end for loop
+        //add the option values to the select list with an id of 
+        document.getElementById("ListProprio").innerHTML = html.join("");
+		// FIN - Initialisation de la liste des proprietaire
+		
 		bb1(); // Ferme la fenêtre de l'action 1
 		};
 		
+        ///**********/// cliquer sur "FERMER" 
+		document.getElementById("bbb").addEventListener("click", bb2);
+        //fin
 
         function bb2() {
+		// enleve la couleur vert a la valeur de proprietaire
+		document.getElementById("SelectProprio").className = "SelectProprioC";
 		//Ferme la fenêtre
         document.getElementById("action2ht").className = "action2htc";
 		rr5(); // fermer également la couche de sélection active
@@ -978,27 +1032,31 @@
 		}
         };
 		
-		///**********/// cliquer sur "FERMER" 
-		document.getElementById("bbb").addEventListener("click", bb2);
-        //fin
+		
 		
 		
 		//cliquer sur les différentes tenure
 		var tttt = "test";
-        document.getElementById("Filtre1").addEventListener('mouseover', function() {
-  rr4("BFI Usine de Triage Lachenaie Ltd.")});
-		document.getElementById("Filtre2").addEventListener('mouseover', function() {
-  rr4("GENERAL DYNAMICS PRODUITS DE DÉFENSE ET SYSTÈMES TACTIQUES - CANADA INC.")});
-		document.getElementById("Filtre3").addEventListener('mouseover',function() {
-  rr4("3563308 CANADA INC.")});
-		document.getElementById("Filtre4").addEventListener('mouseover', function() {
-  rr4("SOEURS DU ST NOM DE JESUS ET DE MARIE")});
+        document.getElementById("Filtre1").addEventListener('click', function() {
+        rr4("BFI Usine de Triage Lachenaie Ltd.")});
+		document.getElementById("Filtre2").addEventListener('click', function() {
+        rr4("GENERAL DYNAMICS PRODUITS DE DÉFENSE ET SYSTÈMES TACTIQUES - CANADA INC.")});
+		document.getElementById("Filtre3").addEventListener('click',function() {
+        rr4("3563308 CANADA INC.")});
+		document.getElementById("Filtre4").addEventListener('click', function() {
+        rr4("SOEURS DU ST NOM DE JESUS ET DE MARIE")});
 		
         function rr4(valeur) {	
+		//Enlever le vert a la valeur de proprio selectionner et enlever la couche
+		document.getElementById("SelectProprio").className = "SelectProprioC";
+		if (map.hasLayer(featureGroupP)) {
+        featureGroupP.clearLayers();
+		map.removeLayer(featureGroupP);
+		}
 		//afficher la couche active - tenure publique
 		document.getElementById("coucheactive2").className = "coucheactive2a2";
 		document.getElementById("aaa2").className = "aaa2classenew"; 
-		$('#F2-1').html("<br />"+valeur);
+		$('#coucheactive2').html(valeur);
 		//ajouter la couche filtrer
         rr6(valeur);
 		};
@@ -1010,7 +1068,7 @@
 		//enlever la couche active et autre infos - remmettre les classe à cacher
 		document.getElementById("coucheactive2").className = "coucheactive2a";
 		document.getElementById("aaa2").className = "aaa2classe"; 
-		$('#F2-1').html("");
+		$('#coucheactive2').html("");
 		//Enlever la couche de sélection
 		if (map.hasLayer(featureGroupF)) {
         featureGroupF.clearLayers();
@@ -1036,7 +1094,7 @@
 		// Creer la coiche filtrer
 		var data = cadd;
 	    var cadproprio = new L.GeoJSON(data, {
-		style: style4,
+		style: style5,
 		filter: function(feature, layer) {
         return feature.properties.NM_PROPR == action1;
             },
@@ -1046,7 +1104,9 @@
 			return cadproprio;
 			}
 		
-		function style4(feature) {
+		
+		
+		function style5(feature) {
         return {
         fillColor: 'blue',
         fillOpacity: 0.4,
@@ -1057,8 +1117,7 @@
 		
 		
 					// LISTE DE PROPRIÉTAIRE
-			function bonbon(){
-		console.log("hey");
+		function bonbon(){
 		listeProprio111 = []; 
 		var data = cadd;
 	    var cadproprio = new L.GeoJSON(data, {
@@ -1070,25 +1129,20 @@
 			}
 			
 			
-			function removeDuplicates(array) {
-            return array.filter((a, b) => array.indexOf(a) === b)
-            };
+		function removeDuplicates(array) {
+        return array.filter((a, b) => array.indexOf(a) === b)
+        };
 			
-           var ww = bonbon();
-	       var html = [];
-           var www = 	removeDuplicates(ww);
-           www.sort();		
-
-	    for (var i = 0; i < www.length; i++) {//begin for loop
-
-        //add the option elements to the html array
-        html.push("<option>" + www[i] + "</option>")
-
-        }//end for loop
-
-        //add the option values to the select list with an id of 
-        document.getElementById("ListProprio").innerHTML = html.join("");
+           
 		
+		//Style de la couche de sélection 
+		function style4(feature) {
+        return {
+        fillColor: '#1bb56b',
+        fillOpacity: 0.6,
+		weight: 0
+        };
+        }
 		
 		
 		// Quand la valeur de proprio est sélectionner	
@@ -1099,7 +1153,7 @@
 		listeLots = []; 
 		var data = cadd;
 	    var cadproprio = new L.GeoJSON(data, {
-		style: style3,
+		style: style4,
 		filter: function(feature, layer) {
         return feature.properties.NM_PROPR == action1;
             },
@@ -1113,18 +1167,24 @@
 		var featureGroupP = L.featureGroup();	
         // Quand la valeur de proprio est sélectionner		
 		$(document).on('change','#ListProprio', function(e) {
+		document.getElementById("SelectProprio").className = "SelectProprioC";
 		featureGroupP.clearLayers();
 		var newProprio = e.target.value;
 		$('#SelectProprio').html(e.target.value);
+		});
+			
+		
+		// Clic sur le bouton appliquer pour filtrer par la valeur de proprio
+		document.getElementById("Appliquer").addEventListener("click", AppliquerF);
+		
+		function AppliquerF(){
 		var layer = createproprio();
 		featureGroupP.addLayer(layer);
 		featureGroupP.addTo(map);
 		map.fitBounds(featureGroupP.getBounds());
 		featureGroupP.bringToBack();
-		});
-			
-		
-		
+        document.getElementById("SelectProprio").className = "SelectProprioCNew";
+		}
 		
 		
 
@@ -1264,6 +1324,7 @@
 	"Aire protégées (WMS)" : wmsLayer8,
 	"Aire protégées-registre (WMS)" : wmsLayer9,
 	"Zones inondables-BDZI(WMS)" : wmsLayer10,
+	"Pourvoirie à droits exclusifs(WMS)" : wmsLayer13,
 	"Label" : CartoDB_PositronOnlyLabels
  },
   "<b style='font-size: 12px; border: 1px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>AUTRES</b>": {
@@ -1351,10 +1412,7 @@ L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
 			$('#box12').html("<a href='data/pdf/test.pdf' target='_blank'>Documents administratifs (pdf)</a>");
 			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em;background-color: #078BAB;  color: white;'> Historique</b><div class='line'></div>");
 			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Historique des contacts... </b>");
-			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;border-radius: .125em;   color: white;'> Actions</b><div class='line'></div>");
 			$('#box16').html("<b id='action1'  >• Afficher les lots appartenant à ce propriétaire</b>");
-            $('#box17').html("<b id='action1'  >• Filtre avancée</b>");
-			$('#box18').html("<b id='action1'  >• Sélectionner des polygones</b>");
 		e.layer.setStyle({'color': 'red',weight: 3});
 		selected = e.layer;
 		if(e.layer._popup)
@@ -1391,10 +1449,8 @@ L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
 	   $('#box12').html("");
 	   $('#box13').html("");
 	   $('#box14').html("");
-	   $('#box15').html("");
 	   $('#box16').html("");
-	   $('#box17').html("");
-	   $('#box18').html("");
+
        };	
 	
 	    // Enlever la sélection
