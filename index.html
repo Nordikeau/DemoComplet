@@ -119,12 +119,14 @@
 	
 <!--ACTION1 - lots du même proprio -->	
 <div id="action1ht" class = "action1htc">
+    <div id = "barre" ></div>
+	<br />
     <div>
 	<b id = "coucheactive" >Couche de sélection active : </b>
 	<b id = "zoom" >zoom</b>
 	</div>
 	<br />
-	<div id = "proprioactif" style="text-align:left;display: inline-block; padding: 4px;     background-color: #f4f4f4;   font-size: 14px; color:black; font-weight:bold; " ></div>
+	<div id = "proprioactif" style="text-align:left;display: inline-block; padding: 4px;     background-color: #f4f4f4;   font-size: 12px; color:black; font-weight:bold; " ></div>
 	<br />
 	<br />
 	<div id = "p1" class = "box"></div>
@@ -135,6 +137,8 @@
 	
 <!--ACTION2 - Filtre avancé  -->	
 <div id="action2ht" class = "action2htc">
+ <div id = "barre" ></div>
+	<br />
     <div>
 	<b style="text-align:left; font-size: 13px; color:#666; font-weight:bold; "> Filtrer par tenure :</b>
 	<b id = bbb >Fermer</b>
@@ -156,16 +160,16 @@
 	</select>
 	<br />
 	<div id = "SelectProprio" class = "SelectProprioC" ></div>
-	<p id = Appliquer >Appliquer</p>
+	<p id = "Appliquer" class = "AppliquerC"  >Appliquer</p>
 	</div>
 	
 <!--Sidebar  --> 
  <div id="sidebar">
    <div id="head2">
-    <img src="icone/down-arrow.svg" alt="HTML5" id="logoImport"   width="35" height="35">
-    <img src="icone/question-mark-inside-a-circle.svg" alt="HTML5" id="logo"   width="35" height="35">
+    <img src="icone/down-arrow.svg" alt="HTML5" id="logoImport"   width="25" height="25">
+    <img src="icone/question-mark-inside-a-circle.svg" alt="HTML5" id="logo"   width="25" height="25">
 	<img src="icone/uda_logo.png" alt="HTML5" class="logouda"  width="50" height="50">
-	<img src="icone/printer.svg" alt="HTML5" id="logoprint"  width="35" height="35"></div>
+	<img src="icone/printer.svg" alt="HTML5" id="logoprint"  width="25" height="25"></div>
 	<br />
 	<br />
 	<br />
@@ -212,6 +216,14 @@
    <br />
    <div id = "box14" class = "box"></div>
    
+   
+    <div id = "majcad" > <p style=" font-size: 11px; margin-left: 76px; color:#666;  " >Mise à jour du cadastre 2020-07-14</p> </div>
+	
+
+    
+
+   
+  
    
  
 
@@ -991,6 +1003,8 @@
         function rr3() {	
 		//Ouvrir la fenêtre
 		document.getElementById("action2ht").className = "action2htc2";
+		//Remmetre le bouton appliquer au départ
+		document.getElementById("Appliquer").className = "AppliquerC";
 		// Initialisation de la liste des proprietaire
 		$('#SelectProprio').html("");
 		var ww = bonbon();
@@ -1167,6 +1181,7 @@
 		var featureGroupP = L.featureGroup();	
         // Quand la valeur de proprio est sélectionner		
 		$(document).on('change','#ListProprio', function(e) {
+		document.getElementById("Appliquer").className = "AppliquerCnew";
 		document.getElementById("SelectProprio").className = "SelectProprioC";
 		featureGroupP.clearLayers();
 		var newProprio = e.target.value;

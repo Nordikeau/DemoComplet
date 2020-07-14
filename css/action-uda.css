@@ -1,4 +1,21 @@
 /*    action 1     */
+
+#barre {
+	position: absolute;
+    z-index: 1000;
+    background: #078BAB;
+    /* right: 0; */
+    height: 10px;
+    width: 100%;
+    /* left: -1px; */
+    /* border-radius: .4em; */
+    /* box-shadow: 0 0 10px #999; */
+    top: 0;
+    margin-left: -10px;
+}
+
+
+
 #coucheactive {
 	display: inline-block;
     text-align: left;
@@ -17,7 +34,7 @@
     font-weight: bold;
     border: 1px solid grey;
     border-radius: .5em;
-    margin-left: 195px;
+    margin-left: 150px;
     padding: 3px;
 }
 
@@ -35,7 +52,7 @@
     border: 3px solid #8B0000;
     background-color: #8B0000;
     border-radius: .5em;
-    margin-left: 140px;
+    margin-left: 120px;
     padding: 1px;
 }
 #aaa:hover {
@@ -52,7 +69,7 @@
     font-weight: bold;
     border-radius: .5em;
     margin-left: 5%;
-    padding: 3px;
+    padding: 1px;
 }
 
 #action1:hover {
@@ -81,23 +98,7 @@
   border: 3px solid grey;
 }
 
-#Appliquer {
-	display: inline-block;
-    text-align: left;
-    font-size: 11px;
-    cursor: pointer;
-    color: white;
-    font-weight: bold;
-    border: 3px solid #1bb56b;
-    background-color: #1bb56b;
-    border-radius: .5em;
-    padding: 1px;
-	margin-left:5px;
-}
-#Appliquer:hover {
-  background-color: grey;
-  border: 3px solid grey;
-}
+
 
 /*    fenêtre action2 - Liste déroulante des propritaires */
 #ListProprio { 
@@ -116,7 +117,11 @@
 
 
 
+
+
+
 /*    fenêtre action1    */
+
 .action1htc {
     display:none
 }
@@ -129,7 +134,7 @@
     right: 0;
     margin: 10px;
     min-height: 50px;
-    width: 400px;
+    width: 350px;
     left: 20%;
     border-radius: .4em;
     box-shadow: 0 0 10px #999;
@@ -229,7 +234,41 @@
 }
 
 
+.AppliquerC {
+	display: inline-block;
+    text-align: left;
+    font-size: 11px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    border: 3px solid #1bb56b;
+    background-color: #1bb56b;
+    border-radius: .5em;
+    padding: 1px;
+	margin-left:-8px;
+}
+.AppliquerC:hover {
+  background-color: grey;
+  border: 3px solid grey;
+}
 
+.AppliquerCnew {
+	display: inline-block;
+    text-align: left;
+    font-size: 11px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    border: 3px solid #1bb56b;
+    background-color: #1bb56b;
+    border-radius: .5em;
+    padding: 1px;
+	margin-left:5px;
+}
+.AppliquerCnew:hover {
+  background-color: grey;
+  border: 3px solid grey;
+}
 
 /*    fin fenêtre action2    */
 
