@@ -45,6 +45,17 @@
   box-shadow: 0 0 8px yellow;
 }
 
+#logoGoogle {
+	position: absolute;
+    left: 40%;
+    height: 30px;
+	top : 8px;
+	cursor: pointer;
+}
+#logoGoogle:hover {
+  box-shadow: 0 0 8px yellow;
+}
+
 #logoImport {
 	position: absolute;
     left: 55%;

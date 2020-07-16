@@ -163,9 +163,26 @@
 	<p id = "Appliquer" class = "AppliquerC"  >Appliquer</p>
 	</div>
 	
+<!--ACTION3 - StreetView  -->	
+<div id="action3ht" class = "action3htc">
+ <div id = "barre" ></div>
+	<br />
+    <div>
+	<b style="text-align:left; font-size: 13px; color:#666; font-weight:bold; "> Déplacer le bonhomme bleu le long des routes, s'assurer de bien zoomer sur la carte</b>
+	<br />
+	<b style="text-align:left; font-size: 9px; color:red; font-weight:bold; "> Bug : fermer la fenetre par l'utilisateur et non par le bouton fermer</b>
+	<br />
+	<br />
+	<div id = "lat1" class = "box"></div>
+	<div id = "lon1" class = "box"></div>
+	<b id = ccc >Fermer</b>
+	</div>
+	</div>
+	
 <!--Sidebar  --> 
  <div id="sidebar">
    <div id="head2">
+   <img src="icone/street-view-doll.svg" alt="HTML5" id="logoGoogle"   width="25" height="25">
     <img src="icone/down-arrow.svg" alt="HTML5" id="logoImport"   width="25" height="25">
     <img src="icone/question-mark-inside-a-circle.svg" alt="HTML5" id="logo"   width="25" height="25">
 	<img src="icone/uda_logo.png" alt="HTML5" class="logouda"  width="50" height="50">
@@ -949,7 +966,8 @@
         }
         
 		function rr2() {
-         		bb2(); // ferme la fenêtre de l'action2		
+         		bb2(); // ferme la fenêtre de l'action2	
+                Google2(); // ferme la fenêtre de l'action3				
 		   if (map.hasLayer(featureGroup)) {
         featureGroup.clearLayers();
 		map.removeLayer(featureGroup);
@@ -1022,6 +1040,7 @@
 		// FIN - Initialisation de la liste des proprietaire
 		
 		bb1(); // Ferme la fenêtre de l'action 1
+		Google2(); // ferme la fenêtre de l'action3	
 		};
 		
         ///**********/// cliquer sur "FERMER" 
@@ -1205,6 +1224,86 @@
 
 
 
+////////////////////////////////ACTIONS3 STREETVIEW//////////////////////////////////////
+
+        var featureGroupG = L.featureGroup();
+		
+		
+		var greenIcon = L.icon({
+        iconUrl: 'icone/street-view-dollred.svg',
+    iconSize:     [40, 40], // size of the icon
+    //shadowSize:   [50, 50], // size of the shadow
+    //iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    //shadowAnchor: [4, 62],  // the same for the shadow
+    //popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+        // cliquer sur filtre avancé de la sidebar
+		document.getElementById("logoGoogle").addEventListener('click', Google1);
+					
+        var marker;	
+        var lat;
+        var lon;
+		
+		
+        function Google1() {
+		var nnn = "nouveau";
+        win = "";		
+		//Ouvrir la fenêtre
+		document.getElementById("action3ht").className = "action3htc2";
+		// Réenitialiser la couche
+		if (map.hasLayer(featureGroupG)) {
+        featureGroupG.clearLayers();
+		map.removeLayer(featureGroupG);
+            }
+		var marker = new L.marker(map.getCenter(), {
+        draggable: 'true',icon: greenIcon
+        });
+		featureGroupG.addLayer(marker);
+		featureGroupG.addTo(map);
+		var position = marker.getLatLng();
+		console.log(position);
+		
+		// quand l'utilisateur déplace l'icon
+		marker.on('dragend', function(event) {
+        var position = marker.getLatLng();
+		var lat = position.lat;
+		var lon = position.lng;
+		$('#lat1').html("<b  style='text-align:left; color: grey;font-weight: 100;  font-size : 12px'>Latitude : </b>"+lat.toFixed(6));
+		$('#lon1').html("<b  style='text-align:left;color: grey;font-weight: 100;  font-size : 12px'>Longitude : </b>"+lon.toFixed(6));
+		var url = 'https://www.google.com/maps?layer=c&cbll='+lat+','+lon;
+		if (nnn == "nouveau") {
+        win = window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=570,left=355,width=400,height=400");
+		nnn = "";
+            }
+		else {
+		win.window.close();
+		 win = window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=570,left=355,width=400,height=400");
+        //win.window.location.assign('https://mtlurb.com/topic/447-autoroute-19/page/20/');
+        }
+		});
+		
+		bb1(); // Ferme la fenêtre de l'action 1
+		bb2(); // Ferme la fenêtre de l'action 2
+		};
+		
+        ///**********/// cliquer sur "FERMER" 
+		document.getElementById("ccc").addEventListener("click", Google2);
+        //fin
+
+        function Google2() {
+		win.window.close();
+		//Ferme la fenêtre
+        document.getElementById("action3ht").className = "action3htc";
+		if (map.hasLayer(featureGroupG)) {
+        featureGroupG.clearLayers();
+		map.removeLayer(featureGroupG);
+            }
+        };
+
+		
+	
+		
 		
 			//TEST LABEL1
 			//marker.bindTooltip(function (layer) {

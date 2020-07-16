@@ -65,7 +65,7 @@
     text-align: left;
     font-size: 11px;
     cursor: pointer;
-    color: black;
+    color: grey;
     font-weight: bold;
     border-radius: .5em;
     margin-left: 5%;
@@ -74,6 +74,7 @@
 
 #action1:hover {
   background-color: yellow;
+  color: black;
 }
 
 /*   Fin  action 1     */  
@@ -98,7 +99,25 @@
   border: 3px solid grey;
 }
 
+/*    action 3 StreetView    */
 
+#ccc {
+	display: inline-block;
+    text-align: left;
+    font-size: 11px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    border: 3px solid #8B0000;
+    background-color: #8B0000;
+    border-radius: .5em;
+    margin-left: 42%;
+    padding: 1px;
+}
+#ccc:hover {
+  background-color: grey;
+  border: 3px solid grey;
+}
 
 /*    fenêtre action2 - Liste déroulante des propritaires */
 #ListProprio { 
@@ -273,6 +292,26 @@
 /*    fin fenêtre action2    */
 
 
+
+
+/*    fenêtre action3    */
+.action3htc {
+    display:none
+}
+
+.action3htc2 {
+	position: absolute;
+    z-index: 1000;
+    background: white;
+    padding: 10px;
+    right: 0;
+    margin: 10px;
+    min-height: 50px;
+    width: 350px;
+    left: 20%;
+    border-radius: .4em;
+    box-shadow: 0 0 10px #999;
+}
 
 
 
