@@ -39,6 +39,10 @@
 	<!-- Get feature info WMS -->
     <script src="js/WMS/leaflet.wms.js"></script>
 	
+	<!-- Animated icon -->
+    <script src="dependance/L.Icon.Pulse.js"></script>
+	<link rel="stylesheet" href="css/L.Icon.Pulse.css" />
+	
 	<!-- VectorGrid -->
 	<script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
 	<script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.js"></script>
@@ -168,9 +172,9 @@
  <div id = "barre" ></div>
 	<br />
     <div>
-	<b style="text-align:left; font-size: 13px; color:#666; font-weight:bold; "> Déplacer le bonhomme bleu le long des routes, s'assurer de bien zoomer sur la carte</b>
+	<b style="text-align:left; font-size: 13px; color:#666; font-weight:bold; "> Déplacer le point rouge le long des routes, s'assurer de bien zoomer sur la carte</b>
 	<br />
-	<b style="text-align:left; font-size: 9px; color:red; font-weight:bold; "> Bug : fermer la fenetre par l'utilisateur et non par le bouton fermer</b>
+	<b style="text-align:left; font-size: 9px; color:red; font-weight:bold; "> Pour repositionner le point sur la carte, re-cliquer sur l'icone Street-view</b>
 	<br />
 	<br />
 	<div id = "lat1" class = "box"></div>
@@ -182,11 +186,12 @@
 <!--Sidebar  --> 
  <div id="sidebar">
    <div id="head2">
-   <img src="icone/street-view-doll.svg" alt="HTML5" id="logoGoogle"   width="25" height="25">
-    <img src="icone/down-arrow.svg" alt="HTML5" id="logoImport"   width="25" height="25">
-    <img src="icone/question-mark-inside-a-circle.svg" alt="HTML5" id="logo"   width="25" height="25">
-	<img src="icone/uda_logo.png" alt="HTML5" class="logouda"  width="50" height="50">
-	<img src="icone/printer.svg" alt="HTML5" id="logoprint"  width="25" height="25"></div>
+   <!--<img src="icone/street-view-doll.svg" alt="HTML5" id="logoGoogle"   width="25" height="25">-->
+   <span id="logoGoogle"></span>
+   <span id="logoImport"></span>
+   <span id="logo"></span>
+   <span id="logoprint"></span>
+	<img src="icone/uda_logo.png" alt="HTML5" class="logouda"  width="50" height="50"></div>
 	<br />
 	<br />
 	<br />
@@ -455,7 +460,8 @@
 
         //TEST WMS ORTHO MFFP
 		var wmsLayer5 = L.tileLayer.wms('https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wms/Inventaire_Ecoforestier?', {
-        layers: 'Inventaire_Ecoforestier'
+        layers: 'Inventaire_Ecoforestier',
+		maxZoom: 20
         })
 		
 		
@@ -559,8 +565,8 @@
 		//maxZoom: 19,
 		
 	    var esribasemap = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-		attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-
+		attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+		maxZoom: 20
 	});
 		
 		
@@ -934,6 +940,7 @@
 		var action1;
 		var featureGroup = L.featureGroup();
 		var featureGroupF = L.featureGroup();
+		win = "";	
 	
         function create(){
 		// prendre la valeur de propriétaire
@@ -1227,18 +1234,11 @@
 ////////////////////////////////ACTIONS3 STREETVIEW//////////////////////////////////////
 
         var featureGroupG = L.featureGroup();
-		
-		
-		var greenIcon = L.icon({
-        iconUrl: 'icone/street-view-dollred.svg',
-    iconSize:     [40, 40], // size of the icon
-    //shadowSize:   [50, 50], // size of the shadow
-    //iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-    //shadowAnchor: [4, 62],  // the same for the shadow
-    //popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-});
+	
+	   var pulsingIcon = L.icon.pulse({iconSize:[14,14],color:'red'});
+	
 
-        // cliquer sur filtre avancé de la sidebar
+        // cliquer sur le icon de street view
 		document.getElementById("logoGoogle").addEventListener('click', Google1);
 					
         var marker;	
@@ -1248,7 +1248,7 @@
 		
         function Google1() {
 		var nnn = "nouveau";
-        win = "";		
+       // win = "";		
 		//Ouvrir la fenêtre
 		document.getElementById("action3ht").className = "action3htc2";
 		// Réenitialiser la couche
@@ -1257,7 +1257,7 @@
 		map.removeLayer(featureGroupG);
             }
 		var marker = new L.marker(map.getCenter(), {
-        draggable: 'true',icon: greenIcon
+        draggable: 'true',icon: pulsingIcon
         });
 		featureGroupG.addLayer(marker);
 		featureGroupG.addTo(map);
@@ -1277,8 +1277,12 @@
 		nnn = "";
             }
 		else {
-		win.window.close();
-		 win = window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=570,left=355,width=400,height=400");
+		if (!!win.window) {
+        win.window.close();
+        }
+		win = window.open(url, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=570,left=355,width=400,height=400");
+		
+	
         //win.window.location.assign('https://mtlurb.com/topic/447-autoroute-19/page/20/');
         }
 		});
@@ -1290,9 +1294,14 @@
         ///**********/// cliquer sur "FERMER" 
 		document.getElementById("ccc").addEventListener("click", Google2);
         //fin
+		
+		
+
 
         function Google2() {
-		win.window.close();
+		if (!!win.window) {
+        win.window.close();
+        }
 		//Ferme la fenêtre
         document.getElementById("action3ht").className = "action3htc";
 		if (map.hasLayer(featureGroupG)) {

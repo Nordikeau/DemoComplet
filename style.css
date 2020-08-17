@@ -34,48 +34,59 @@
 }
 
 
-#logo {
-	position: absolute;
-    left: 85%;
-    height: 30px;
-	top : 8px;
-	cursor: pointer;
-}
-#logo:hover {
-  box-shadow: 0 0 8px yellow;
-}
+
 
 #logoGoogle {
+	background-image: url(icone/street-view-doll.svg);
 	position: absolute;
     left: 40%;
-    height: 30px;
-	top : 8px;
+    height: 25px;
+	width: 25px;
+	top : 10px;
 	cursor: pointer;
 }
 #logoGoogle:hover {
-  box-shadow: 0 0 8px yellow;
+background-image: url(icone/street-view-doll-hover.svg);
+}
+
+#logo {
+	background-image: url(icone/question-mark-inside-a-circle.svg);
+	position: absolute;
+    left: 85%;
+     height: 25px;
+	width: 25px;
+	top : 10px;
+	cursor: pointer;
+}
+#logo:hover {
+background-image: url(icone/question-mark-inside-a-circle-hover.svg);
 }
 
 #logoImport {
+	background-image: url(icone/down-arrow.svg);
 	position: absolute;
     left: 55%;
-    height: 30px;
-	top : 8px;
+    height: 25px;
+	width: 25px;
+	top : 10px;
 	cursor: pointer;
 }
 #logoImport:hover {
-  box-shadow: 0 0 8px yellow;
+background-image: url(icone/down-arrow-hover.svg);
 }
 
 #logoprint {
+	background-image: url(icone/printer.svg);
 	position: absolute;
     left: 70%;
-    height: 30px;
-	top : 8px;
+   height: 25px;
+	width: 25px;
+	top : 10px;
+	cursor: pointer;
 }
 
 #logoprint:hover {
-  box-shadow: 0 0 8px yellow;
+    background-image: url(icone/printer-hover.svg);
 }
 
 /*    fenêtre d'information     */
