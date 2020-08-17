@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo - Laurent Savard</title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet.js"></script>
+	
+	<!-- search stephano -->
+	<link rel="stylesheet" href="css/leaflet-search.css" />
+    <script src="js/leaflet-search.js"></script>
+	<script src="data/pointeau.js"></script>
+	<script src="data/cad.js"></script>
+	<script src="data/BV_Assomption2.js"></script>
+	
+	
+    <!-- LayerList -->
+    <script src="js/ControlLayer2/groupedlayercontrol.js"></script>
+	<script src="js/ControlLayer2/groupedlayercontrol.min.js"></script>
+	<script src="js/ControlLayer2/groupedlayercontrol.min.js.map"></script>
+    <link rel="stylesheet" href="js/ControlLayer2/groupedlayercontrol.css" />
+	<link rel="stylesheet" href="js/ControlLayer2/groupedlayercontrol.min.css" />
+	
+	
+	
+	
+	<script src="js/WMS/leaflet.wms.js"></script>
+	
+    <!-- Draw -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw-src.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw-src.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    
+	<!-- AQ -->
+	<script src="js/AQ.js"></script>
+	
+
+	
+	<!-- Zoom home font  -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css"/>
+
+	<script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="leaflet.zoomhome.css"/>
+    <script src="leaflet.zoomhome.min.js"></script>
+	
+	<link rel="stylesheet" href="style.css" />
+	
+	
+    <style>
+	
+	</style>	
+	
+
+
+</head>
+<body>
+<div id="test-in" class = "test-test-debut">
+    <img src="icone/delete-button.svg" alt="HTML5" id="close"  width="25" height="25">
+	<br />
+	<p style="text-align:left; font-size: 12px; color:grey; font-weight:bold; "> Ceci est un exemple pour ajouter de l'information...</p>
+	<p style="text-align:left; font-size: 12px; color:grey; font-weight:bold; "> Version BETA, Laurent Savard 2020.</p>
+	</div>
+<!--action1  -->	
+<div id="action1ht" class = "action1htc">
+	<b id = "coucheactive" >Couche de sélection active : </b>
+	<br />
+	<br />
+	<div id = "proprioactif" style="text-align:left;display: inline-block; padding: 4px;     background-color: #f4f4f4;   font-size: 14px; color:black; font-weight:bold; " ></div>
+	<div id = "p1" class = "box"></div>
+	<div id = "p2" class = "box"></div>
+	<p id = aaa >ENLEVER LA COUCHE</p>
+	</div>
+ <div id="head2">
+    <img src="icone/question-mark-inside-a-circle.svg" alt="HTML5" id="logo"   width="35" height="35">
+	<img src="icone/uda_logo.png" alt="HTML5" class="logouda"  width="50" height="50">
+	<img src="icone/printer.svg" alt="HTML5" id="logoprint"  width="35" height="35"></div>
+ <div id="sidebar">
+   <!-- valeur de priorio  -->
+   <div id="proprio" class = "test-test-debut"></div>
+   
+   <div id="findbox"></div>
+   <br />
+   <div id = "box1" class = "box11"></div>
+   <div class="line"></div>
+   <br />
+   <div id = "box2" class = "box"></div>
+   <br />
+   <div id = "box2a" class = "box"></div>
+   <div id = "box2b" class = "box"></div>
+   <div id = "box2c" class = "box"></div>
+   <div id = "box2d" class = "box"></div>
+   <br />
+   <div id = "box2e" class = "box"></div>
+   <br />
+   <div id = "box3" class = "box"></div>
+   <br />
+   <div id = "box3a" class = "box"></div>
+   <br />
+   <div id = "box3b" class = "box"></div>
+   <br />
+   <div id = "box5" class = "box"></div>
+   <br />
+   <div id = "box6" class = "box"></div>
+   <br />
+   <div id = "box7" class = "box"></div>
+   <br />
+   <div id = "box8" class = "box"></div>
+   <br />
+   <div id = "box9" class = "box"></div>
+   <br />
+   <div id = "box10" class = "boxtele"></div>
+   <div id = "box11" class = "boxtele"></div>
+   <div id = "box12" class = "boxtele"></div>
+   <br />
+   <div id = "box13" class = "box"></div>
+   <br />
+   <div id = "box14" class = "box"></div>
+   <br />
+   <div id = "box15" class = "box"></div>
+   <br />
+   <div id = "box16" ></div>
+   
+   
+ 
+
+
+
+</div>
+     
+<div id = "map"></div>
+
+
+	
+	
+
+
+    <script>
+	
+        var map = L.map('map',{ zoomControl: false }).setView([46.389310, -72.631907],9);
+		
+
+		//AFFICHAGE DE LA BARRE D'INFORMATION
+	    function aa() {
+        document.getElementById("test-in").className = "test-test";
+        };
+		document.getElementById("logo").addEventListener("click", aa);
+		
+		function bb() {
+        document.getElementById("test-in").className = "test-test-debut";
+        };
+		document.getElementById("close").addEventListener("click", bb);
+		
+		//PANES
+		
+		map.createPane("pane450").style.zIndex = 450;
+		
+		//SCALE BAR
+		L.control.scale().addTo(map);
+		//var controlLayers = L.control.layers().addTo(map);
+		
+		
+		
+		// ZOOM HOME
+		var zoomHome = L.Control.zoomHome();
+        zoomHome.addTo(map);
+		
+	    
+		
+		//DRAW PLUGINS
+		var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+        var drawControl = new L.Control.Draw({
+		 draw: {
+             circlemarker: false,   
+         },
+         edit: {
+             featureGroup: drawnItems
+         }
+         });
+         map.addControl(drawControl);
+		 map.on('draw:created', function (e) {
+         var type = e.layerType,
+         layer = e.layer;
+
+         if (type === 'marker') {
+        // Do marker specific actions
+        }
+
+       // Do whatever else you need to. (save to db, add to map etc)
+       drawnItems.addLayer(layer);
+        });
+		
+		drawnItems.bindPopup("ex : 456 m");
+		
+		
+		
+		 
+		 
+		 //SEARCH BAR
+        var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+        var results = new L.LayerGroup().addTo(map);
+
+        searchControl.on('results', function(data){
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+        results.addLayer(L.marker(data.results[i].latlng));
+        }
+        });
+		 
+		//MAP TILER BASEMAP Key non fonctionnelle
+		
+		//var tile_ = L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=XCT8ZBBTXdhrjQXORobg', {
+		//attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+	    //}).addTo(map);
+		//controlLayers.addOverlay(tile_, "Basemap - Street");
+		
+		 
+		// OPEN STREET MAP
+		//var tileopen = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //maxZoom: 19,
+		//opacity: 0.6,
+        //attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+        //}).addTo(map);
+		//controlLayers.addOverlay(tileopen, "Basemap - OpenStreetMap");
+		
+		var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+	    subdomains: 'abcd',
+	    maxZoom: 19
+        }).addTo(map);
+	
+		//HYDRO TILEMAP
+		map.createPane('labels');
+        map.getPane('labels').style.zIndex = 650;
+		var tile2 = L.tileLayer('Tile/test/{z}/{x}/{y}.png', {
+		pane: 'labels'
+	    })
+		
+		
+		//TEST WMS RELIEF MFFP
+		var wmsLayer1 = L.tileLayer.wms('https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?', {
+        layers: 'lidar_ombre'
+        })
+		
+
+		
+		//TEST WMS CARTE ECO MFFP
+		//var wmsLayer2 = L.tileLayer.wms('https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?', {
+       //layers: 'ori_pee_ori_prov',
+		//zIndex: 1
+       //})
+		
+
+
+
+		
+		var options = {'transparent': true};
+var source = L.WMS.source("https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?", options);
+var wmsLayer2 = source.getLayer('ori_pee_ori_prov');
+
+
+		
+		
+		
+		
+		
+        
+		//TEST WMS ZONE AGRICOLE
+		var wmsLayer3 = L.tileLayer.wms('https://carto.cptaq.gouv.qc.ca/cgi-bin/cptaq?', {
+        layers: 'zone_agricole',
+		opacity: 0.5
+        })
+		
+		//TEST WMS ZONE AGRICOLE
+		var wmsLayer3a = L.tileLayer.wms('https://carto.cptaq.gouv.qc.ca/cgi-bin/cptaq?', {
+        layers: 'decisions',
+		transparent: true,
+        format: 'image/png'
+        })
+		
+		//TEST WMS ZONE AGRICOLE
+		var wmsLayer3b = L.tileLayer.wms('https://carto.cptaq.gouv.qc.ca/cgi-bin/cptaq?', {
+        layers: 'decision_numero',
+		transparent: true,
+        format: 'image/png',
+		opacity: 0.5
+        })
+		
+		
+		
+		//TEST WMS MILIEUX HUMIDES CIC
+		var wmsLayer4 = L.tileLayer.wms('https://maps.ducks.ca/arcgis/services/Public/QC_Carto_MH_sudqc_mai2019/MapServer/WMSServer', {
+        layers: '1',
+        transparent: true,
+        format: 'image/png'
+        })
+
+        //TEST WMS ORTHO MFFP
+		var wmsLayer5 = L.tileLayer.wms('https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wms/Inventaire_Ecoforestier?', {
+        layers: 'Inventaire_Ecoforestier'
+        })
+		
+		 //TEST Wfs
+		var wmsLayer6 = L.tileLayer.wms('https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wfs/Inventaire_Ecoforestier?', {
+        layers: 'Inventaire_Ecoforestier'
+        })
+		
+		
+		
+	    var wmsLayer7 = L.tileLayer.wms('https://servicescarto.mern.gouv.qc.ca/pes/services/Territoire/AQ_ADRESSES_WMS/MapServer/WMSServer', {
+        layers: 'Adresses',
+        transparent: true,
+        format: 'image/png'
+        })
+		
+		//ESRI BASEMAP
+		var esribasemap = L.esri.basemapLayer('Imagery');
+        L.esri.basemapLayer('Imagery');
+		zIndex: 1
+	
+		
+         //TEST MARKER
+		//L.marker([46.177152, -73.831691]).addTo(map)
+        //.bindPopup("Bassin versant de la riviere l'Assomption")
+        //.openPopup();
+		
+        
+	
+		
+		//LABEL CAD
+		var tile3 = L.tileLayer('tilelabel10/{z}/{x}/{y}.png', {
+        minZoom: 16,
+       maxZoom: 18,
+        tms: false,
+        pane: 'labels'
+        }).addTo(map);
+		
+		
+		
+		
+		//BASSIN VERSANT
+		// symbologie du bassin versant
+		function style(feature) {
+        return {
+        fillColor: '#ECFB03',
+        weight: 1,
+        opacity: 1,
+        color: 'red',
+        dashArray: '3',
+        fillOpacity: 0.3
+        };
+        }
+	
+
+
+       var data = bv;
+       var bv1 = L.geoJson(data ,{
+	   style: style,
+       onEachFeature: function(feature, featureLayer) {
+	   featureLayer.bindPopup(feature.properties.NOM_COURS_);
+       }
+       });
+	   
+	   
+	   
+	   
+	   
+	   //REFUGE BIO
+       $.getJSON("data/Refuge_Bio.geojson",function(data){
+       var datalayer = L.geoJson(data ,{
+       onEachFeature:function(feature, featureLayer) {
+	   featureLayer.bindPopup(feature.properties.REF_STATU);
+       }
+       })
+	  
+       });
+	   
+	   //CADASTRE
+       //$.getJSON("data/cad.geojson",function(data){
+       //var datalayer = L.geoJson(data ,{
+       //onEachFeature:function(feature, featureLayer) {
+	   //featureLayer.bindPopup(feature.properties.NO_LOT);
+       //}
+       //})
+	 
+       //});
+	   
+
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+
+
+	   //POINT D'EAU
+	   //Highlight
+	   var clickCircle;
+	   function onMapClick(e) {
+    if (clickCircle != undefined) {
+      map.removeLayer(clickCircle);
+    };
+    clickCircle = L.circle(e.latlng, 1, {
+      color: 'red',
+	  weight : 20,
+      opacity: 0.2,
+    }).addTo(map);
+  }
+	   
+	  // remove the highlignt 
+	   function onMapClick2(e) {
+    if (clickCircle != undefined) {
+      map.removeLayer(clickCircle);
+    };
+	}
+	    
+	   var data = pointeau;
+	   var ratIcon = L.icon({
+       iconUrl: 'icone/placeholder.svg',
+       iconSize: [20,20]
+       });
+	   
+       var pteau1 =  new L.geoJson(data ,{
+	   pointToLayer: function(feature,latlng){
+	   var marker = L.marker(latlng,{icon: ratIcon});
+       marker.bindPopup("niveau d'eau: "+feature.properties.valeur+ '<br/>' + feature.properties.remarque+ '<br/>' + "Laurent Savard");
+       return marker;
+	   }
+       }).on('click', onMapClick);
+	   
+      // Enlever la sélection
+       map.on('click', onMapClick2);
+	   // ajouter moseover
+
+
+
+
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   //POINT D'EAU avec symbologie
+	   function test(d) {
+	   if (d <= 5) {
+       var ratIcon = L.icon({
+       iconUrl: 'icone/eau1.png',
+       iconSize: [25,25]
+       }); 
+       return ratIcon;
+	   }
+	   if (d > 5) {
+       var ratIcon = L.icon({
+       iconUrl: 'icone/eau2.png',
+       iconSize: [30,30]
+       }); 
+       return ratIcon;
+	   }
+       }
+	   
+	   $.getJSON("data/point_eau2.geojson",function(data){
+       var datalayer = L.geoJson(data ,{
+	   pointToLayer: function(feature,latlng){
+	   var marker = L.marker(latlng,{icon: test(feature.properties.valeur)});
+       marker.bindPopup("niveau d'eau: "+feature.properties.valeur+ '<br/>' + feature.properties.remarque+ '<br/>' + "Laurent Savard");
+       return marker; 
+       }
+       })
+	 
+       });
+	   
+	   
+	   
+	   // CARTE ECO 
+	   function getColor(d) {
+	   if (d == 'resineux') {
+       var aa = '#32CD32'
+       return aa;
+	   }
+	   if (d == 'mixte') {
+       var aa = '#FFFF00' 
+       return aa;
+	   }
+	   if (d == 'feuillus') {
+       var aa = '#FFA500';
+       return aa;
+	   }
+	   }
+	 	   
+	    function style3(feature) {
+        return {
+        fillColor: getColor(feature.properties.type),
+        weight: 1,
+        opacity: 1,
+        color: 'black',
+        dashArray: '0',
+        fillOpacity: 0.5
+        };
+        }
+		
+	   $.getJSON("data/carte_eco5.geojson",function(data){
+       var datalayer = L.geoJson(data ,{
+	   style: style3,
+       onEachFeature: function(feature, featureLayer) {
+	   featureLayer.bindPopup(feature.properties.type);
+       }
+       })
+	
+       });
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   // TEST SEARCH STEPHANO - MARKER
+		//geojsonOpts = {
+		//	pointToLayer: function(feature, latlng) {
+		//		return L.marker(latlng, {
+		//			icon: L.divIcon({
+		//				className: feature.properties.NO_LOT,
+		//				iconSize: L.point(16, 16),
+		//				html: feature.properties.NO_LOT[0].toUpperCase(),
+		//			})
+		//		}).bindPopup(feature.properties.NO_LOT);
+		//	}
+		//};
+
+	   //var poiLayers = L.layerGroup([
+	   //L.geoJson(cadd, geojsonOpts),
+
+	   //])
+	
+
+	   //L.control.search({
+       //layer: poiLayers,
+		//initial: false,
+		//propertyName: 'NO_LOT',
+		//buildTip: function(text, val) {
+		//	var type = val.layer.feature.properties.NO_LOT;
+		//	return '<a href="#" class="'+type+'">'+text+'<b>'+type+'</b></a>';
+		//}
+	    //})
+	   // .addTo(map);
+	   
+	  // TEST SEARCH STEPHANO - POLYGON
+	   
+	  // hilight polygone onclick
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+	  
+	  
+	  
+	  
+
+	  
+	  
+
+	
+	  
+	        function onEachFeature(feature, marker) {
+			//POPUP NORMAL
+            //var popupcontent = "<b style='color: red;font-weight: bold;font-size : 12px;'</b>"+feature.properties.NO_LOT +"<br /> <b style='color: grey; font-size : 11px'>zoom</b>"
+            var container = $('<div />');
+			container.on('click', '.smallPolygonLink', function (e){ map.fitBounds(marker.getBounds())  }         );
+			container.html("<b style='color: red;font-weight: bold;font-size : 12px;' </b>"+feature.properties.NO_LOT + "<a style='color: blue; text-shadow: 5px 0px grey; font-size: 11px; text-decoration: none;' href='#' class='smallPolygonLink'>      ►</a>");
+            container.append($('<span class="bold">').text(""))
+			marker.bindPopup(container[0]);
+            marker.on('click',  function (e) {
+			
+			// div invisible - valeur de proprietaire //
+			$('#proprio').html(marker.feature.properties.NM_PROPR);
+			
+			
+			
+			
+			$('#box1').html(marker.feature.properties.NO_LOT);
+			$('#box2').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>Propriétaire : </b>"+marker.feature.properties.NM_PROPR);
+			
+			$('#box2a').html("<b  style='color: grey; font-weight: 100; font-size : 12px'>Contact : </b>"+marker.feature.properties.Contact);
+			$('#box2b').html("<b  style='color: grey; font-weight: 100; font-size : 12px'>Adresse : </b>"+marker.feature.properties.Adresse1);
+			$('#box2c').html(marker.feature.properties.Adresse2);
+			$('#box2d').html("<b  style='color: grey;font-weight: 100;  font-size : 12px'>No. de téléphone : </b>"+marker.feature.properties.Tel);
+			
+			
+			
+			$('#box2e').html("<b  style='color: grey; font-weight: 100; font-size : 12px'>Lots appartenant à ce propriétaire : <br /> 4 567 345, 5 654 345 </b>");
+			
+			$('#box3').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Circonscription foncière : </b>"+marker.feature.properties.NM_CIRCN_F);
+			$('#box3a').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Ancien lot : </b>"+marker.feature.properties.Ancienlot);
+			$('#box3b').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Titre : </b>"+marker.feature.properties.Titre);
+			
+			$('#box5').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em; background-color: #078BAB;    color: white;'> Cadre administratif</b><div class='line'></div>");
+			
+			
+			$('#box6').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>Région administrative : </b>"+marker.feature.properties.RegAdm);
+			$('#box7').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>MRC : </b>"+marker.feature.properties.MRC);
+			$('#box8').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Municipalité : </b>"+marker.feature.properties.Mun);
+			$('#box9').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em; background-color: #078BAB;   color: white;'> Téléchargements</b><div class='line'></div>");
+			$('#box10').html("<a   href='data/pdf/test.pdf' target='_blank'>Fiche du propriétaire (pdf)</a>");
+			$('#box11').html("<a  href='data/pdf/test.pdf' target='_blank'>Plan de localisation (pdf)</a>");
+			$('#box12').html("<a href='data/pdf/test.pdf' target='_blank'>Documents administratifs (pdf)</a>");
+			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block;border-radius: .125em; background-color: #078BAB;   color: white;'> Historique</b><div class='line'></div>");
+			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Historique des contacts... </b>");
+			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB; border-radius: .125em;  color: white;'> Actions</b><div class='line'></div>");
+			$('#box16').html("<img src='icone/proprio.svg' alt='HTML5' id='action1'  width='20' height='20'>");
+
+			});
+			}
+			
+		//ACTIONS1 DE LA SIDEBAR
+        
+		var action1;
+		var featureGroup = L.featureGroup();
+	
+		
+        function create(){
+		// prendre la valeur de propriétaire
+		bb = document.getElementById("proprio");
+		action1 = bb.textContent;
+		// L'assigner à la fenetre active
+		$('#proprioactif').html(action1);
+		
+		// Creer la coiche filtrer
+		var data = cadd;
+	    var cadproprio = new L.GeoJSON(data, {
+		style: style3,
+		filter: function(feature, layer) {
+        return feature.properties.NM_PROPR == action1;
+            }
+			
+			})
+			return cadproprio;
+			}
+		function style3(feature) {
+        return {
+        fillColor: 'yellow',
+        fillOpacity: 0.6,
+		weight: 0
+        };
+        }
+        
+
+		
+		function rr2() {
+        if (map.hasLayer(featureGroup)) {
+        featureGroup.clearLayers();
+		map.removeLayer(featureGroup);
+		//Fermer la fenêtre
+		document.getElementById("action1ht").className = "action1htc";
+            }
+            else{
+			     
+			    var layerp = create();
+				featureGroup.addLayer(layerp);
+				featureGroup.addTo(map);
+				var list = ["4 564 543", " 4 543 345", " 6 333 456 "];
+				var Nblist = "3";
+				// Les infos pour la fenêtre de action1
+			    $('#p1').html("<b  style='color: grey;font-weight: 100; margin-left: -15px; font-size : 13px'>Listes de lots de ce propriétaire : </b>"+list);
+			    $('#p2').html("<b  style='color: grey; margin-left: -15px; font-weight: 100; font-size : 13px'>Nombre de lots : </b>"+Nblist);
+				//Ouvrir la fenêtre
+				document.getElementById("action1ht").className = "action1htc2";
+				featureGroup.bringToBack();
+            } ;
+		};
+		
+		document.getElementById("box16").addEventListener('click', rr2);
+		
+		function bb1() {
+		//Ferme la fenêtre
+        document.getElementById("action1ht").className = "action1htc";
+		if (map.hasLayer(featureGroup)) {
+        featureGroup.clearLayers();
+		map.removeLayer(featureGroup);
+		}
+        };
+		document.getElementById("aaa").addEventListener("click", bb1);
+
+		
+        
+		
+			
+
+			
+			//TEST LABEL1
+			//marker.bindTooltip(function (layer) {
+            //return layer.feature.properties.NO_LOT;
+            //},{ permanent: true }).openTooltip();
+			
+			//TEST LABEL2
+			//map.on('zoomend', function () {
+      
+	//if (map.getZoom() >= 15 )
+    //{
+       // var label = L.marker(marker.getBounds().getCenter(), {
+           // icon: L.divIcon({
+           // className: 'label',
+           // html: feature.properties.NO_LOT,
+           // iconSize: [100, 40]
+          //  }),
+	       // }).addTo(map);
+   // }  
+    //if (map.getZoom() < 15 )
+    //{
+    //    map.removeLayer(;
+    //}   	
+//});
+            //TEST3
+			
+			//var label = L.marker(marker.getBounds().getCenter(), {
+            //icon: L.divIcon({
+           // className: 'label',
+           // html: feature.properties.NO_LOT,
+            //iconSize: [100, 40]
+           // }),
+	       // }).addTo(map);
+			
+
+
+  
+
+    // remove the highlignt 
+	function onMapClick3(e) {
+    featuresLayer.resetStyle(selected)
+    };
+	
+    // Create new geojson layer
+	var data = cadd;
+	var selected;
+    var featuresLayer = new L.GeoJSON(data, {
+			style: function(feature) {
+				return {
+				fillColor: '#FFA500',
+				color: '#FFA500',
+				weight: 1.2,
+				fillOpacity: 0.05
+				};
+				//pane: 'pane450'
+			},
+			onEachFeature: onEachFeature
+       }).on('click', function (e) {
+       //Check for selected
+      if (selected) {
+         //Reset selected to default style
+        e.target.resetStyle(selected)
+      }
+      //Assign new selected
+      selected = e.layer
+      // Bring selected to front
+      selected.bringToFront()
+	  // Zoom to feature
+	  //map.fitBounds(e.layer.getBounds(), {maxZoom: map.getZoom()});
+      // Style selected
+      selected.setStyle({
+        'color': 'red',
+		weight: 3,
+     })
+	 })
+    
+	
+	
+	 // Enlever la sélection
+       map.on('click', onMapClick3);
+	   // ajouter moseover
+	
+	
+	
+
+
+	
+	// Echelle de visibilité
+	//map.on('zoomend', function () {
+    //if (map.getZoom() < 13 ) {
+    //    map.removeLayer(featuresLayer);
+    //}
+	//if (map.getZoom() >= 13 )
+    //{
+    //    map.addLayer(featuresLayer);
+    //}   
+   //});
+	
+
+
+	
+	
+	
+	// LISTES DES COUCHES
+	var baseLayers = {
+	"CartoDB": CartoDB_Positron
+  };
+	
+	var groupedOverlays = {
+  "<b style = ' font-size: 12px; border: 1px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>COUCHES</b>" : {
+	"Cadastre (Recherche)": featuresLayer,
+	"Point d'eau" : pteau1,
+	"Bassin versant de l'Assomption" : bv1
+	
+  },
+  "<b style='font-size: 12px; border: 1px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>FONDS DE CARTE</b>": {
+  	"Esri basemap (Tile)" :esribasemap,
+	"Relief ombré (WMS)" : wmsLayer1,
+	"Orthophotos MFFP (WMTS)" : wmsLayer5
+  },
+  "<b style='font-size: 12px; border: 2px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>THÉMATIQUE</b>": {
+    "Adresse (WMS)" : wmsLayer7,
+    "Adresse Québec(WMS)" : AQ,
+    "Hydrographie" : tile2,
+	"Carte écoforestière (WMS)" : wmsLayer2,
+	"Zone agricole (WMS)" : wmsLayer3,
+	"Decisions (WMS)" : wmsLayer3a,
+	"Decisions numéro	(WMS)" : wmsLayer3b,
+	"Milieux humides CIC (WMS)" : wmsLayer4
+  },
+  "<b style='font-size: 12px; border: 1px solid grey; display: inline-block; background-color: grey;border-radius: .2em; width : 200px;    color: white;'>AUTRES</b>": {
+	"Couche éditable" : drawnItems
+  },
+};
+	
+	var options = {
+  // Make the "Base Maps" group exclusive (use radio inputs)
+  exclusiveGroups: ["<span class='controlHeading'>Base Maps</span>"],
+  // Show a checkbox next to non-exclusive group labels for toggling all
+  groupCheckboxes: true,
+  collapsed: false
+};
+
+// Use the custom grouped layer control, not "L.control.layers"
+L.control.groupedLayers(baseLayers, groupedOverlays).addTo(map);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+
+	   map.addLayer(featuresLayer);
+
+	   var searchControl = new L.Control.Search({
+	    container: 'findbox',
+		layer: featuresLayer,
+		propertyName: 'NO_LOT',
+		marker: false,
+		moveToLocation: function(latlng, title, map) {
+			//map.fitBounds( latlng.layer.getBounds() );
+			var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+  			map.setView(latlng, zoom); // access the zoom
+		}
+	    });
+
+	    searchControl.on('search:locationfound', function(e) {
+		onMapClick3;
+		
+		// div invisible - valeur de proprietaire //
+			$('#proprio').html(e.layer.feature.properties.NM_PROPR);
+			
+			
+	    $('#box1').html(e.layer.feature.properties.NO_LOT);
+			$('#box2').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>Propriétaire : </b>"+e.layer.feature.properties.NM_PROPR);
+			
+			$('#box2a').html("<b  style='color: grey;font-weight: 100;  font-size : 12px'>Contact : </b>"+e.layer.feature.properties.Contact);
+			$('#box2b').html("<b  style='color: grey; font-weight: 100; font-size : 12px'>Adresse : </b>"+e.layer.feature.properties.Adresse1);
+			$('#box2c').html(e.layer.feature.properties.Adresse2);
+			$('#box2d').html("<b  style='color: grey; font-weight: 100; font-size : 12px'>No. de téléphone : </b>"+e.layer.feature.properties.Tel);
+			
+			
+			
+			$('#box2e').html("<b  style='color: grey;font-weight: 100;  font-size : 12px'>Lots appartenant à ce propriétaire : <br /> 4 567 345, 5 654 345 </b>");
+			
+			$('#box3').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Circonscription foncière : </b>"+e.layer.feature.properties.NM_CIRCN_F);
+			$('#box3a').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Ancien lot : </b>"+e.layer.feature.properties.Ancienlot);
+			$('#box3b').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Titre : </b>"+e.layer.feature.properties.Titre);
+			$('#box5').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em; background-color: #078BAB;    color: white;'> Cadre administratif</b><div class='line'></div>");
+			$('#box6').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>Région administrative : </b>"+e.layer.feature.properties.RegAdm);
+			$('#box7').html("<b  style='color: grey;font-weight: 100; font-size : 13px'>MRC : </b>"+e.layer.feature.properties.MRC);
+			$('#box8').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Municipalité : </b>"+e.layer.feature.properties.Mun);
+			$('#box9').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em;background-color: #078BAB;   color: white;'> Téléchargements</b><div class='line'></div>");
+			$('#box10').html("<a   href='data/pdf/test.pdf' target='_blank'>Fiche du propriétaire (pdf)</a>");
+			$('#box11').html("<a  href='data/pdf/test.pdf' target='_blank'>Plan de localisation (pdf)</a>");
+			$('#box12').html("<a href='data/pdf/test.pdf' target='_blank'>Documents administratifs (pdf)</a>");
+			$('#box13').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; border-radius: .125em;background-color: #078BAB;  color: white;'> Historique</b><div class='line'></div>");
+			$('#box14').html("<b  style='color: grey; font-weight: 100;font-size : 13px'>Historique des contacts... </b>");
+			$('#box15').html("<b style = ' font-size: 14px; border: 3px solid #078BAB; display: inline-block; background-color: #078BAB;border-radius: .125em;   color: white;'> Actions</b><div class='line'></div>");
+			$('#box16').html("<img src='icone/proprio.svg' alt='HTML5' id='action1'  width='20' height='20'>");
+		e.layer.setStyle({'color': 'red',weight: 3});
+		selected = e.layer;
+		if(e.layer._popup)
+			e.layer.openPopup();
+
+	   }).on('search:collapsed', function(e) {
+        selected = e.layer;
+		onMapClick3;
+		featuresLayer.eachLayer(function(layer) {	//restore feature color
+			featuresLayer.resetStyle(layer);
+		});	
+	    });
+	    
+	
+       // Enlever les informations du lot dans le sidebar quand un clic survient 
+	   function resetinfo(e) {
+       $('#box1').html("");
+	   $('#box2').html("");
+	   $('#box2a').html("");
+	   $('#box2b').html("");
+	   $('#box2c').html("");
+	   $('#box2d').html("");
+	   $('#box2e').html("");
+	   $('#box3').html("");
+	   $('#box3a').html("");
+	   $('#box3b').html("");
+	   $('#box4').html("");
+	   $('#box5').html("");
+	   $('#box6').html("");
+	   $('#box7').html("");
+	   $('#box8').html("");
+	   $('#box9').html("");
+	   $('#box10').html("");
+	   $('#box11').html("");
+	   $('#box12').html("");
+	   $('#box13').html("");
+	   $('#box14').html("");
+	   $('#box15').html("");
+	   $('#box16').html("");
+       };	
+	
+	    // Enlever la sélection
+       map.on('click', onMapClick3);
+	   map.on('click', resetinfo);
+	   // ajouter moseover
+	
+	
+	
+	
+	    map.addControl( searchControl );  //inizialize search control
+	   
+
+	   
+	   
+       
+	   
+	   
+	   
+
+	   
+	   
+	   
+	   
+
+	   
+	   
+	   
+	   
+	   
+	   
+
+
+      
+    </script>
+</body>
+</html>

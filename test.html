@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Demo - Laurent Savard</title>
+	<meta charset="utf-8" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://unpkg.com/esri-leaflet@2.3.3/dist/esri-leaflet.js"></script>
+	
+	<!-- search stephano -->
+	<link rel="stylesheet" href="css/leaflet-search.css" />
+    <script src="js/leaflet-search.js"></script>
+	<script src="data/pointeau.js"></script>
+	<script src="data/cad.js"></script>
+	<script src="data/BV_Assomption2.js"></script>
+	
+	
+    <!-- LayerList -->
+    <!--<script src="js/ControlLayer2/groupedlayercontrol.js"></script>
+	<script src="js/ControlLayer2/groupedlayercontrol.min.js"></script>
+	<script src="js/ControlLayer2/groupedlayercontrol.min.js.map"></script>
+    <link rel="stylesheet" href="js/ControlLayer2/groupedlayercontrol.css" />
+	<link rel="stylesheet" href="js/ControlLayer2/groupedlayercontrol.min.css" />     -->
+	
+    <!-- Draw -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw-src.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw-src.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    
+	<!-- AQ -->
+	<script src="js/AQ.js"></script>
+	
+	<!-- Get feature info WMS -->
+    <script src="js/WMS/leaflet.wms.js"></script>
+	
+	<!-- VectorGrid -->
+	<script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
+	<script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.js"></script>
+	<script src="data/hydro2020.js"></script>
+	
+
+	
+	<!-- Zoom home font  -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css"/>
+
+	<script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="leaflet.zoomhome.css"/>
+    <script src="leaflet.zoomhome.min.js"></script>
+	
+	<link rel="stylesheet" href="style.css" />
+	
+	<!-- Style des actions de la sidebar  -->
+	<link rel="stylesheet" href="css/action-uda.css"/>
+	
+	
+	
+    <style>
+	 body {
+   margin: 0px;
+   border: 0px;
+   padding: 0px;
+   font-family: sans-serif;
+   color: #333;
+}
+
+#map {
+  width: 82%;
+  height : 100%;
+  position : absolute;
+  right:0;
+}
+	</style>	
+	
+
+
+</head>
+<body>
+<div id="test-in" class = "test-test-debut">
+    <img src="icone/delete-button.svg" alt="HTML5" id="close"  width="25" height="25">
+	<br />
+	<p style="text-align:left; font-size: 12px; color:grey; font-weight:bold; "> Ceci est un exemple pour ajouter de l'information...</p>
+	<p style="text-align:left; font-size: 12px; color:grey; font-weight:bold; "> Version BETA, Laurent Savard 2020.</p>
+	</div>
+<!--action1  -->	
+<div id="action1ht" class = "action1htc">
+	<b id = "coucheactive" >Couche de sélection active : </b>
+	<br />
+	<br />
+	<div id = "proprioactif" style="text-align:left;display: inline-block; padding: 4px;     background-color: #f4f4f4;   font-size: 14px; color:black; font-weight:bold; " ></div>
+	<br />
+	<br />
+	<div id = "p1" class = "box"></div>
+	<br />
+	<div id = "p2" class = "box"></div>
+	<p id = aaa >ENLEVER LA COUCHE</p>
+	</div>
+	
+<!--action2  -->	
+<div id="action2ht" class = "action2htc">
+	<p style="text-align:left; font-size: 12px; color:black; font-weight:bold; "> Filtrer par :</p>
+	<b id = Filtre1 class = "Filtre1">PUBLIQUE</b>
+	<br />
+	<b id = Filtre2 class = "Filtre1">PRIVÉE</b>
+	<br />
+	<b id = Filtre3 class = "Filtre1" >MUNICIPALE</b>
+	<br />
+	<b id = Filtre4 class = "Filtre1">PROPRIÉTÉ DE TC ENERGY</b>
+	<p id = bbb >FERMER</p>
+	<b id = "coucheactive2" class = "coucheactive2a" >Couche de sélection active : </b>
+	<div id = "F2-1" style="text-align:left;display: inline-block; padding: 4px;        font-size: 14px; color:black; font-weight:bold; "></div>
+	<p id = "aaa2" class = "aaa2classe" >ENLEVER LA COUCHE</p>
+	</div>
+ 
+ <div id="sidebar">
+   <div id="head2">
+    <img src="icone/question-mark-inside-a-circle.svg" alt="HTML5" id="logo"   width="35" height="35">
+	<img src="icone/uda_logo.png" alt="HTML5" class="logouda"  width="50" height="50">
+	<img src="icone/printer.svg" alt="HTML5" id="logoprint"  width="35" height="35"></div>
+	<br />
+	<br />
+	<br />
+   <!-- valeur de priorio  -->
+   <div id="proprio" class = "test-test-debut"></div>
+   
+   <div id="findbox"></div>
+   <br />
+   <div id = "box1" class = "box11"></div>
+   <div class="line0"></div>
+   <br />
+   <div id = "box2" class = "box"></div>
+   <br />
+   <div id = "box2a" class = "box"></div>
+   <div id = "box2b" class = "box"></div>
+   <div id = "box2c" class = "box"></div>
+   <div id = "box2d" class = "box"></div>
+   <br />
+   <div id = "box3" class = "box"></div>
+   <br />
+   <div id = "box3a" class = "box"></div>
+   <br />
+   <div id = "box3b" class = "box"></div>
+   <br />
+   <div id = "box5" class = "box"></div>
+   <br />
+   <div id = "box6" class = "box"></div>
+   <br />
+   <div id = "box7" class = "box"></div>
+   <br />
+   <div id = "box8" class = "box"></div>
+   <br />
+   <div id = "box9" class = "box"></div>
+   <br />
+   <div id = "box10" class = "boxtele"></div>
+   <div id = "box11" class = "boxtele"></div>
+   <div id = "box12" class = "boxtele"></div>
+   <br />
+   <div id = "box13" class = "box"></div>
+   <br />
+   <div id = "box14" class = "box"></div>
+   <br />
+   <div id = "box15" class = "box"></div>
+   <br />
+   <div id = "box16" ></div>
+   <br />
+   <div id = "box17" ></div>
+   
+   
+ 
+
+
+
+</div>
+     
+<div id = "map"></div>
+
+
+	
+	
+
+
+    <script>
+		
+       var map = L.map('map',{ zoomControl: false }).setView([46.389310, -72.631907],9);
+		
+
+
+		//AFFICHAGE DE LA BARRE D'INFORMATION
+	    function aa() {
+        document.getElementById("test-in").className = "test-test";
+        };
+		document.getElementById("logo").addEventListener("click", aa);
+		
+		function bb() {
+        document.getElementById("test-in").className = "test-test-debut";
+        };
+		document.getElementById("close").addEventListener("click", bb);
+		
+		//PANES
+		map.createPane("pane450").style.zIndex = 450;
+		
+		//SCALE BAR
+		L.control.scale().addTo(map);
+		//var controlLayers = L.control.layers().addTo(map);
+		
+		
+		// ZOOM HOME
+		var zoomHome = L.Control.zoomHome();
+        zoomHome.addTo(map);
+		
+	    		
+		//DRAW PLUGINS
+		var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+        var drawControl = new L.Control.Draw({
+		 draw: {
+             circlemarker: false,   
+         },
+         edit: {
+             featureGroup: drawnItems
+         }
+         });
+         map.addControl(drawControl);
+		 map.on('draw:created', function (e) {
+         var type = e.layerType,
+         layer = e.layer;
+
+         if (type === 'marker') {
+        // Do marker specific actions
+        }
+
+       // Do whatever else you need to. (save to db, add to map etc)
+       drawnItems.addLayer(layer);
+        });
+		
+		drawnItems.bindPopup("ex : 456 m");
+		
+		
+		
+		 
+		 
+		 //SEARCH BAR
+        var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+        var results = new L.LayerGroup().addTo(map);
+
+        searchControl.on('results', function(data){
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+        results.addLayer(L.marker(data.results[i].latlng));
+        }
+        });
+		 
+		//MAP TILER BASEMAP Key non fonctionnelle
+		
+		//var tile_ = L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=XCT8ZBBTXdhrjQXORobg', {
+		//attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+	    //}).addTo(map);
+		//controlLayers.addOverlay(tile_, "Basemap - Street");
+		
+		 
+		// OPEN STREET MAP
+		//var tileopen = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //maxZoom: 19,
+		//opacity: 0.6,
+        //attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+        //}).addTo(map);
+		//controlLayers.addOverlay(tileopen, "Basemap - OpenStreetMap");
+		
+		var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+	    subdomains: 'abcd',
+	   maxZoom: 19
+        });
+		
+		
+
+//HYDRO TILEMAP
+		map.createPane('labels');
+        map.getPane('labels').style.zIndex = 650;
+		var tile2 = L.tileLayer('Tile/test/{z}/{x}/{y}.png', {
+		pane: 'labels'
+	    })
+		
+		
+		//TEST WMS RELIEF MFFP
+		var wmsLayer1 = L.tileLayer.wms('https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?', {
+        layers: 'lidar_ombre'
+        })
+		
+		
+		//TEST WMS CARTE ECO MFFP
+		//var wmsLayer2 = L.tileLayer.wms('https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?', {
+        //layers: 'ori_pee_ori_prov',
+		//zIndex: 1
+        //})
+		// GET FEATURE INFO
+		var options = {'transparent': true, opacity: 0.7};
+        var source = L.WMS.source("https://geoegl.msp.gouv.qc.ca/ws/mffpecofor.fcgi?", options);
+        var wmsLayer2 = source.getLayer('ori_pee_ori_prov');
+        
+		//TEST WMS ZONE AGRICOLE
+		var wmsLayer3 = L.tileLayer.wms('https://carto.cptaq.gouv.qc.ca/cgi-bin/cptaq?', {
+        layers: 'zone_agricole',
+		opacity: 0.5
+        })
+		
+		//TEST WMS ZONE AGRICOLE
+		//var wmsLayer3a = L.tileLayer.wms('https://carto.cptaq.gouv.qc.ca/cgi-bin/cptaq?', {
+        //layers: 'decisions',
+		//transparent: true,
+        //format: 'image/png'
+        //})
+		// GET FEATURE INFO
+		var options = {'transparent': true,format: 'image/png'};
+        var source = L.WMS.source("https://carto.cptaq.gouv.qc.ca/cgi-bin/cptaq", options);
+        var wmsLayer3a = source.getLayer('decisions');
+		
+		//TEST WMS ZONE AGRICOLE
+		var wmsLayer3b = L.tileLayer.wms('https://carto.cptaq.gouv.qc.ca/cgi-bin/cptaq?', {
+        layers: 'decision_numero',
+		transparent: true,
+        format: 'image/png',
+		opacity: 0.5
+        })
+		
+			
+		//TEST WMS MILIEUX HUMIDES CIC
+		var wmsLayer4 = L.tileLayer.wms('https://maps.ducks.ca/arcgis/services/Public/QC_Carto_MH_sudqc_mai2019/MapServer/WMSServer', {
+        layers: '1',
+        transparent: true,
+        format: 'image/png'
+        })
+
+
+
+//TEST WMS ORTHO MFFP
+		var wmsLayer5 = L.tileLayer.wms('https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wms/Inventaire_Ecoforestier?', {
+        layers: 'Inventaire_Ecoforestier'
+        })
+		
+		
+		
+		 //TEST Wfs
+		var wmsLayer6 = L.tileLayer.wms('https://servicesmatriciels.mern.gouv.qc.ca/erdas-iws/ogc/wfs/Inventaire_Ecoforestier?', {
+        layers: 'Inventaire_Ecoforestier'
+        })
+		
+		
+		
+	    var wmsLayer7 = L.tileLayer.wms('https://servicescarto.mern.gouv.qc.ca/pes/services/Territoire/AQ_ADRESSES_WMS/MapServer/WMSServer', {
+        layers: 'Adresses',
+        transparent: true,
+        format: 'image/png'
+        })
+		
+		var wmsLayer8 = L.tileLayer.wms('https://www.servicesgeo.enviroweb.gouv.qc.ca/donnees/services/Public/Themes_publics/MapServer/WMSServer?', {
+        layers: 'Territoires d_importance pour la conservation',
+        transparent: true,
+        format: 'image/png'
+        })
+		
+		var wmsLayer9 = L.tileLayer.wms('https://www.servicesgeo.enviroweb.gouv.qc.ca/donnees/services/Public/Themes_publics/MapServer/WMSServer?', {
+        layers: 'Ensemble des aires protégées',
+        transparent: true,
+        format: 'image/png'
+        })
+		
+		var wmsLayer10 = L.tileLayer.wms('https://www.servicesgeo.enviroweb.gouv.qc.ca/donnees/services/Public/Themes_publics/MapServer/WMSServer?', {
+        layers: 'Polygones de zones inondables',
+        transparent: true,
+        format: 'image/png'
+        })
+		
+		
+		
+		var wmsLayer11 = L.tileLayer(
+        "https://geoegl.msp.gouv.qc.ca/carto/wmts?" +
+        "&REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0" +
+        "&STYLE=default" + 
+        "&TILEMATRIXSET=EPSG_3857" +
+        "&FORMAT=image/png"+
+        "&LAYER=carte_gouv_qc_public"+
+	    "&TILEMATRIX={z}" +
+        "&TILEROW={y}" +
+        "&TILECOL={x}",
+	{
+		minZoom : 0,
+		maxZoom : 18,
+        attribution : "IGN-F/Geoportail",
+		tileSize : 256 ,// les tuiles du Géooportail font 256x256px,
+		opacity : 5
+	}
+) ;
+		
+		
+			//ESRI BASEMAP
+		//var esribasemap = L.esri.basemapLayer('Imagery');
+        //L.esri.basemapLayer('Imagery');
+		//zIndex: 1,
+		//maxZoom: 19,
+		
+	    var esribasemap = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+		attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+
+	});
+		
+
+//LABEL CAD
+		var tile3 = L.tileLayer('tilelabel10/{z}/{x}/{y}.png', {
+        minZoom: 16,
+       maxZoom: 18,
+        tms: false,
+        pane: 'labels'
+        }).addTo(map);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var wmsLayer10 = L.tileLayer.wms('https://www.servicesgeo.enviroweb.gouv.qc.ca/donnees/services/Public/Themes_publics/MapServer/WMSServer?', {
+        layers: 'Polygones de zones inondables',
+        transparent: true,
+        format: 'image/png'
+        })
+
+
+// TESTTTTTTTTTTTTTTTTTTTTT	
+var baseMaps = {
+    Streetmap: L.esri.basemapLayer('Streets'),
+	imagery: L.esri.basemapLayer('Imagery')
+};
+
+var overlayMaps = {
+    "Zones inondables-BDZI(WMS)" : wmsLayer10
+};
+
+L.control.layers(baseMaps, overlayMaps).addTo(map);
+	
+	
+	
+	
+	
+	
+	
+	
+	   
+
+
+      
+    </script>
+</body>
+</html>
